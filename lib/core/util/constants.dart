@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Endpoints {
-  static const String baseUrl = "http://192.168.31.149:8761";
+  static const String baseUrl = "http://www.sa3ed.com/api";
+
+  static const String governorates = "/location/all";
 }
 
 class LocalStorageKeys {
@@ -51,8 +53,7 @@ class GetOptions {
 
   static Options getOptionsWithToken(
     String? token, {
-    String language = "en",
-    bool isGuest = false,
+    String language = "ar",
   }) {
     if (token != null && token.isNotEmpty) {
       options.headers = {

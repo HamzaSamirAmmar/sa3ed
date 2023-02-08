@@ -1,6 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/data/base_repository.dart';
+import '../../../../core/error/failures.dart';
+import '../../domain/entities/governorate.dart';
 import '../../domain/repositories/home_repository.dart';
 import '../data_sources/local/home_local_data_source.dart';
 import '../data_sources/remote/home_remote_data_source.dart';
@@ -16,4 +19,10 @@ class HomeRepositoryImp extends BaseRepositoryImpl implements HomeRepository {
     required super.baseLocalDataSource,
     required super.networkInfo,
   });
+
+  @override
+  Future<Either<Failure, List<Governorate>>> getAllGovernorates() async =>
+      await remoteRequest(
+        () => _remote.getAllGovernorates(),
+      );
 }

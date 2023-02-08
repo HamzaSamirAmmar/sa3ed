@@ -10,8 +10,12 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     add(ClearMessage());
   }
 
-  void reInitState() {
-    add(ReInitState());
+  void reInitState({
+    Function? onStateReInitialized,
+  }) {
+    add(ReInitState(
+          (b) => b..onStateReInitialized = onStateReInitialized,
+    ));
   }
 
   @factoryMethod

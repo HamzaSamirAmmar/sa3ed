@@ -10,8 +10,12 @@ class HelpOffersBloc extends Bloc<HelpOffersEvent, HelpOffersState> {
     add(ClearMessage());
   }
 
-  void reInitState() {
-    add(ReInitState());
+  void reInitState({
+    Function? onStateReInitialized,
+  }) {
+    add(ReInitState(
+          (b) => b..onStateReInitialized = onStateReInitialized,
+    ));
   }
 
   @factoryMethod

@@ -16,6 +16,18 @@ abstract class ClearMessage extends HomeEvent
   }
 }
 
+abstract class GetAllGovernorates extends HomeEvent
+    implements Built<GetAllGovernorates, GetAllGovernoratesBuilder> {
+  GetAllGovernorates._();
+
+  factory GetAllGovernorates([Function(GetAllGovernoratesBuilder b) updates]) =
+      _$GetAllGovernorates;
+
+  factory GetAllGovernorates.initial() {
+    return GetAllGovernorates((b) => b);
+  }
+}
+
 abstract class ReInitState extends HomeEvent
     implements Built<ReInitState, ReInitStateBuilder> {
   ReInitState._();

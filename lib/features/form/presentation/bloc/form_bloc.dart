@@ -10,10 +10,13 @@ class FormBloc extends Bloc<FormEvent, FormState> {
     add(ClearMessage());
   }
 
-  void reInitState() {
-    add(ReInitState());
+  void reInitState({
+    Function? onStateReInitialized,
+  }) {
+    add(ReInitState(
+          (b) => b..onStateReInitialized = onStateReInitialized,
+    ));
   }
-
   @factoryMethod
   FormBloc() : super(FormState.initial()) {
     on<FormEvent>(

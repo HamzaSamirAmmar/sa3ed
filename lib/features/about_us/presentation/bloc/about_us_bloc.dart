@@ -10,8 +10,12 @@ class AboutUsBloc extends Bloc<AboutUsEvent, AboutUsState> {
     add(ClearMessage());
   }
 
-  void reInitState() {
-    add(ReInitState());
+  void reInitState({
+    Function? onStateReInitialized,
+  }) {
+    add(ReInitState(
+          (b) => b..onStateReInitialized = onStateReInitialized,
+    ));
   }
 
   @factoryMethod

@@ -1,3 +1,9 @@
-import '../../../../core/data/base_repository.dart';
+import 'package:dartz/dartz.dart';
 
-abstract class HomeRepository extends BaseRepository {}
+import '../../../../core/data/base_repository.dart';
+import '../../../../core/error/failures.dart';
+import '../entities/governorate.dart';
+
+abstract class HomeRepository extends BaseRepository {
+  Future<Either<Failure, List<Governorate>>> getAllGovernorates();
+}

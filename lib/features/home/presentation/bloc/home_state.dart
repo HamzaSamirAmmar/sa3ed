@@ -2,6 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 import '../../../../core/bloc/base_state.dart';
+import '../../domain/entities/governorate.dart';
 
 part 'home_state.g.dart';
 
@@ -10,6 +11,8 @@ abstract class HomeState
     implements Built<HomeState, HomeStateBuilder> {
   HomeState._();
 
+  BuiltList<Governorate> get governorates;
+
   factory HomeState([Function(HomeStateBuilder b) updates]) = _$HomeState;
 
   factory HomeState.initial() {
@@ -17,7 +20,8 @@ abstract class HomeState
       (b) => b
         ..isLoading = false
         ..message = ''
-        ..error = false,
+        ..error = false
+        ..governorates.replace([]),
     );
   }
 

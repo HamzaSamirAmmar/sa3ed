@@ -10,10 +10,13 @@ part 'base_list_response_model.g.dart';
 @JsonSerializable()
 class BaseListResponseModel<T> {
   @JsonKey(name: 'status')
-  final int? status;
+  final bool? status;
 
-  @JsonKey(name: 'message')
+  @JsonKey(name: 'msg')
   final String? message;
+
+  @JsonKey(name: 'code')
+  final int? code;
 
   @JsonKey(name: 'data')
   @_Converter()
@@ -23,6 +26,7 @@ class BaseListResponseModel<T> {
     this.status,
     this.message,
     this.data,
+    this.code,
   });
 
   factory BaseListResponseModel.fromJson(Map<String, dynamic> json) =>

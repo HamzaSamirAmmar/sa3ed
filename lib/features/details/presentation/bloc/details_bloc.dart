@@ -10,8 +10,12 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     add(ClearMessage());
   }
 
-  void reInitState() {
-    add(ReInitState());
+  void reInitState({
+    Function? onStateReInitialized,
+  }) {
+    add(ReInitState(
+          (b) => b..onStateReInitialized = onStateReInitialized,
+    ));
   }
 
   @factoryMethod

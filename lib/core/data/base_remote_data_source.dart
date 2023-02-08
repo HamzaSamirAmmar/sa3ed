@@ -14,7 +14,6 @@ abstract class BaseRemoteDataSource {
   @protected
   Future<T> performPostRequest<T>({
     required String endpoint,
-    required String language,
     dynamic data,
     String? token,
     Map<String, dynamic>? queryParameters,
@@ -23,7 +22,6 @@ abstract class BaseRemoteDataSource {
   @protected
   Future<T> performPutRequest<T>({
     required String endpoint,
-    required String language,
     dynamic data,
     String? token,
     Map<String, dynamic>? queryParameters,
@@ -32,7 +30,6 @@ abstract class BaseRemoteDataSource {
   @protected
   Future<T> performDeleteRequest<T>({
     required String endpoint,
-    required String language,
     dynamic data,
     String? token,
     Map<String, dynamic>? queryParameters,
@@ -41,7 +38,6 @@ abstract class BaseRemoteDataSource {
   @protected
   Future<T> performGetRequest<T>({
     required String endpoint,
-    required String language,
     String? token,
     Map<String, dynamic>? queryParameters,
   });
@@ -49,7 +45,6 @@ abstract class BaseRemoteDataSource {
   @protected
   Future<List<T>> performGetListRequest<T>({
     required String endpoint,
-    required String language,
     String? token,
     Map<String, dynamic>? queryParameters,
     bool methodIsPost = false,
@@ -68,7 +63,6 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   @override
   Future<T> performPostRequest<T>({
     required String endpoint,
-    required String language,
     dynamic data,
     String? token,
     Map<String, dynamic>? queryParameters,
@@ -82,11 +76,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
         endpoint,
         data: data,
         queryParameters: queryParameters,
-        options: GetOptions.getOptionsWithToken(
-          token,
-          isGuest: token?.isEmpty ?? true,
-          language: language,
-        ),
+        options: GetOptions.getOptionsWithToken(token),
       ),
     );
   }
@@ -94,7 +84,6 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   @override
   Future<T> performPutRequest<T>({
     required String endpoint,
-    required String language,
     dynamic data,
     String? token,
     Map<String, dynamic>? queryParameters,
@@ -108,11 +97,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
         endpoint,
         data: data,
         queryParameters: queryParameters,
-        options: GetOptions.getOptionsWithToken(
-          token,
-          isGuest: token?.isEmpty ?? true,
-          language: language,
-        ),
+        options: GetOptions.getOptionsWithToken(token),
       ),
     );
   }
@@ -120,7 +105,6 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   @override
   Future<T> performDeleteRequest<T>({
     required String endpoint,
-    required String language,
     dynamic data,
     String? token,
     Map<String, dynamic>? queryParameters,
@@ -134,11 +118,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
         endpoint,
         data: data,
         queryParameters: queryParameters,
-        options: GetOptions.getOptionsWithToken(
-          token,
-          isGuest: token?.isEmpty ?? true,
-          language: language,
-        ),
+        options: GetOptions.getOptionsWithToken(token),
       ),
     );
   }
@@ -146,7 +126,6 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   @override
   Future<T> performGetRequest<T>({
     required String endpoint,
-    required String language,
     String? token,
     Map<String, dynamic>? queryParameters,
   }) async {
@@ -158,11 +137,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
       request: dio.get(
         endpoint,
         queryParameters: queryParameters,
-        options: GetOptions.getOptionsWithToken(
-          token,
-          isGuest: token?.isEmpty ?? true,
-          language: language,
-        ),
+        options: GetOptions.getOptionsWithToken(token),
       ),
     );
   }
@@ -170,7 +145,6 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   @override
   Future<List<T>> performGetListRequest<T>({
     required String endpoint,
-    required String language,
     String? token,
     Map<String, dynamic>? queryParameters,
     bool methodIsPost = false,
@@ -188,11 +162,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
           endpoint,
           data: data,
           queryParameters: queryParameters,
-          options: GetOptions.getOptionsWithToken(
-            token,
-            language: language,
-            isGuest: token?.isEmpty ?? true,
-          ),
+          options: GetOptions.getOptionsWithToken(token),
         ),
       );
     } else {
@@ -200,11 +170,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
         request: dio.get(
           endpoint,
           queryParameters: queryParameters,
-          options: GetOptions.getOptionsWithToken(
-            token,
-            language: language,
-            isGuest: token?.isEmpty ?? true,
-          ),
+          options: GetOptions.getOptionsWithToken(token),
         ),
       );
     }
@@ -230,7 +196,6 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
         debugPrint("Result is true\n");
         return result.data as T; // TODO check if the data is null
       }
-
 
       /// 3.2: result is false
       else if (response.statusCode == 404) {

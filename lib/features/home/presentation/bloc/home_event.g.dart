@@ -63,6 +63,66 @@ class ClearMessageBuilder
   }
 }
 
+class _$GetAllGovernorates extends GetAllGovernorates {
+  factory _$GetAllGovernorates(
+          [void Function(GetAllGovernoratesBuilder)? updates]) =>
+      (new GetAllGovernoratesBuilder()..update(updates))._build();
+
+  _$GetAllGovernorates._() : super._();
+
+  @override
+  GetAllGovernorates rebuild(
+          void Function(GetAllGovernoratesBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetAllGovernoratesBuilder toBuilder() =>
+      new GetAllGovernoratesBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetAllGovernorates;
+  }
+
+  @override
+  int get hashCode {
+    return 377997545;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GetAllGovernorates').toString();
+  }
+}
+
+class GetAllGovernoratesBuilder
+    implements Builder<GetAllGovernorates, GetAllGovernoratesBuilder> {
+  _$GetAllGovernorates? _$v;
+
+  GetAllGovernoratesBuilder();
+
+  @override
+  void replace(GetAllGovernorates other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetAllGovernorates;
+  }
+
+  @override
+  void update(void Function(GetAllGovernoratesBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GetAllGovernorates build() => _build();
+
+  _$GetAllGovernorates _build() {
+    final _$result = _$v ?? new _$GetAllGovernorates._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ReInitState extends ReInitState {
   @override
   final Function? onStateReInitialized;
