@@ -8,6 +8,8 @@ part of 'history_state.dart';
 
 class _$HistoryState extends HistoryState {
   @override
+  final BuiltList<Help> helps;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -18,8 +20,12 @@ class _$HistoryState extends HistoryState {
       (new HistoryStateBuilder()..update(updates))._build();
 
   _$HistoryState._(
-      {required this.isLoading, required this.error, required this.message})
+      {required this.helps,
+      required this.isLoading,
+      required this.error,
+      required this.message})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(helps, r'HistoryState', 'helps');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'HistoryState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, r'HistoryState', 'error');
@@ -37,6 +43,7 @@ class _$HistoryState extends HistoryState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is HistoryState &&
+        helps == other.helps &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -45,6 +52,7 @@ class _$HistoryState extends HistoryState {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, helps.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -55,6 +63,7 @@ class _$HistoryState extends HistoryState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'HistoryState')
+          ..add('helps', helps)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -65,6 +74,10 @@ class _$HistoryState extends HistoryState {
 class HistoryStateBuilder
     implements Builder<HistoryState, HistoryStateBuilder> {
   _$HistoryState? _$v;
+
+  ListBuilder<Help>? _helps;
+  ListBuilder<Help> get helps => _$this._helps ??= new ListBuilder<Help>();
+  set helps(ListBuilder<Help>? helps) => _$this._helps = helps;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -83,6 +96,7 @@ class HistoryStateBuilder
   HistoryStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _helps = $v.helps.toBuilder();
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -106,14 +120,28 @@ class HistoryStateBuilder
   HistoryState build() => _build();
 
   _$HistoryState _build() {
-    final _$result = _$v ??
-        new _$HistoryState._(
-            isLoading: BuiltValueNullFieldError.checkNotNull(
-                isLoading, r'HistoryState', 'isLoading'),
-            error: BuiltValueNullFieldError.checkNotNull(
-                error, r'HistoryState', 'error'),
-            message: BuiltValueNullFieldError.checkNotNull(
-                message, r'HistoryState', 'message'));
+    _$HistoryState _$result;
+    try {
+      _$result = _$v ??
+          new _$HistoryState._(
+              helps: helps.build(),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, r'HistoryState', 'isLoading'),
+              error: BuiltValueNullFieldError.checkNotNull(
+                  error, r'HistoryState', 'error'),
+              message: BuiltValueNullFieldError.checkNotNull(
+                  message, r'HistoryState', 'message'));
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'helps';
+        helps.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'HistoryState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

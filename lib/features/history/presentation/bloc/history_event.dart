@@ -16,6 +16,33 @@ abstract class ClearMessage extends HistoryEvent
   }
 }
 
+abstract class DeleteHelp extends HistoryEvent
+    implements Built<DeleteHelp, DeleteHelpBuilder> {
+  DeleteHelp._();
+
+  int get id;
+
+  bool get isOffer;
+
+  factory DeleteHelp([Function(DeleteHelpBuilder b) updates]) = _$DeleteHelp;
+
+  factory DeleteHelp.initial() {
+    return DeleteHelp((b) => b);
+  }
+}
+
+abstract class GetHelpHistory extends HistoryEvent
+    implements Built<GetHelpHistory, GetHelpHistoryBuilder> {
+  GetHelpHistory._();
+
+  factory GetHelpHistory([Function(GetHelpHistoryBuilder b) updates]) =
+      _$GetHelpHistory;
+
+  factory GetHelpHistory.initial() {
+    return GetHelpHistory((b) => b);
+  }
+}
+
 abstract class ReInitState extends HistoryEvent
     implements Built<ReInitState, ReInitStateBuilder> {
   ReInitState._();

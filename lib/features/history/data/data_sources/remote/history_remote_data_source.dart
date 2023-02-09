@@ -1,3 +1,12 @@
+import 'package:sa3ed/core/models/help_model.dart';
+
 import '../../../../../core/data/base_remote_data_source.dart';
 
-abstract class HistoryRemoteDataSource extends BaseRemoteDataSource {}
+abstract class HistoryRemoteDataSource extends BaseRemoteDataSource {
+  Future<List<HelpModel>> getHelpHistory({required List<String> ids});
+
+  Future<void> deleteHelp({
+    required int id,
+    required bool isOffer,
+  });
+}

@@ -8,6 +8,8 @@ part of 'details_state.dart';
 
 class _$DetailsState extends DetailsState {
   @override
+  final Help? help;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -18,7 +20,10 @@ class _$DetailsState extends DetailsState {
       (new DetailsStateBuilder()..update(updates))._build();
 
   _$DetailsState._(
-      {required this.isLoading, required this.error, required this.message})
+      {this.help,
+      required this.isLoading,
+      required this.error,
+      required this.message})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'DetailsState', 'isLoading');
@@ -37,6 +42,7 @@ class _$DetailsState extends DetailsState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is DetailsState &&
+        help == other.help &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -45,6 +51,7 @@ class _$DetailsState extends DetailsState {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, help.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -55,6 +62,7 @@ class _$DetailsState extends DetailsState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'DetailsState')
+          ..add('help', help)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -65,6 +73,10 @@ class _$DetailsState extends DetailsState {
 class DetailsStateBuilder
     implements Builder<DetailsState, DetailsStateBuilder> {
   _$DetailsState? _$v;
+
+  Help? _help;
+  Help? get help => _$this._help;
+  set help(Help? help) => _$this._help = help;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -83,6 +95,7 @@ class DetailsStateBuilder
   DetailsStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _help = $v.help;
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -108,6 +121,7 @@ class DetailsStateBuilder
   _$DetailsState _build() {
     final _$result = _$v ??
         new _$DetailsState._(
+            help: help,
             isLoading: BuiltValueNullFieldError.checkNotNull(
                 isLoading, r'DetailsState', 'isLoading'),
             error: BuiltValueNullFieldError.checkNotNull(

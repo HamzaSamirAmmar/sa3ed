@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:sa3ed/core/models/summary_help_model.dart';
 
 import '../../../../../core/data/base_remote_data_source.dart';
 import '../../../../../core/models/help_model.dart';
@@ -12,14 +13,14 @@ class HelpOffersRemoteDataSourceImp extends BaseRemoteDataSourceImpl
   HelpOffersRemoteDataSourceImp({required super.dio});
 
   @override
-  Future<PaginateResponseModel<HelpModel>> getHelpOffers({
+  Future<PaginateResponseModel<SummaryHelpModel>> getHelpOffers({
     required int page,
     required int? governorateId,
     required int? cityId,
     required int? helpTypeId,
   }) async =>
-      await performGetRequest<PaginateResponseModel<HelpModel>>(
-        endpoint: Endpoints.offerHelp,
+      await performGetRequest<PaginateResponseModel<SummaryHelpModel>>(
+        endpoint: Endpoints.offerHelp(),
         queryParameters: QueryParams.paginationParams(
           page: page,
           governorateId: governorateId,

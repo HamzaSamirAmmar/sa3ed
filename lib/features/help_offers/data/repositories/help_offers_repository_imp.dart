@@ -5,6 +5,7 @@ import '../../../../core/data/base_repository.dart';
 import '../../../../core/entities/help.dart';
 import '../../../../core/entities/paginate_list.dart';
 import '../../../../core/error/failures.dart';
+import '../../../../core/models/summary_help_model.dart';
 import '../../domain/repositories/help_offers_repository.dart';
 import '../data_sources/local/help_offers_local_data_source.dart';
 import '../data_sources/remote/help_offers_remote_data_source.dart';
@@ -23,13 +24,13 @@ class HelpOffersRepositoryImp extends BaseRepositoryImpl
   });
 
   @override
-  Future<Either<Failure, PaginateList<Help>>> getHelpOffers({
+  Future<Either<Failure, PaginateList<SummaryHelpModel>>> getHelpOffers({
     required int page,
     required int? governorateId,
     required int? cityId,
     required int? helpTypeId,
   }) async =>
-      await remoteRequest<PaginateList<Help>>(
+      await remoteRequest<PaginateList<SummaryHelpModel>>(
         () async {
           final paginationModel = await _remote.getHelpOffers(
             page: page,
@@ -37,7 +38,7 @@ class HelpOffersRepositoryImp extends BaseRepositoryImpl
             cityId: cityId,
             helpTypeId: helpTypeId,
           );
-          return PaginateList<Help>(
+          return PaginateList<SummaryHelpModel>(
             data: paginationModel.data,
             count: paginationModel.count,
           );

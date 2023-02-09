@@ -7,6 +7,7 @@ import '../../../features/home/data/models/city_model.dart';
 import '../../../features/home/data/models/governorate_model.dart';
 import '../../../features/home/data/models/help_type_model.dart';
 import '../../error/exceptions.dart';
+import '../../models/help_model.dart';
 
 part 'base_list_response_model.g.dart';
 
@@ -57,6 +58,11 @@ class _Converter<T> implements JsonConverter<T, Object> {
       /*** HelpTypeModel ***/
       if (T.toString() == HelpTypeModel.className) {
         return HelpTypeModel.fromJson(json) as T;
+      }
+
+      /*** HelpModel ***/
+      if (T.toString() == HelpModel.className) {
+        return HelpModel.fromJson(json) as T;
       }
     }
 

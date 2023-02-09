@@ -5,18 +5,19 @@ import 'package:sa3ed/core/entities/help.dart';
 import 'package:sa3ed/features/help_offers/domain/repositories/help_offers_repository.dart';
 
 import '../../../../core/entities/paginate_list.dart';
+import '../../../../core/entities/summary_help.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 
 @lazySingleton
 class GetHelpOffersUseCase
-    implements UseCase<PaginateList<Help>, ParamsGetHelpOffersUseCase> {
+    implements UseCase<PaginateList<SummaryHelp>, ParamsGetHelpOffersUseCase> {
   final HelpOffersRepository _repository;
 
   GetHelpOffersUseCase(this._repository);
 
   @override
-  Future<Either<Failure, PaginateList<Help>>> call(
+  Future<Either<Failure, PaginateList<SummaryHelp>>> call(
     ParamsGetHelpOffersUseCase params,
   ) async =>
       await _repository.getHelpOffers(

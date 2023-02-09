@@ -2,9 +2,12 @@ library base_response_model;
 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:sa3ed/core/models/summary_help_model.dart';
+import 'package:sa3ed/core/network/models/paginate_response_model.dart';
 import 'package:sa3ed/features/form/data/models/submitted_form_model.dart';
 
 import '../../error/exceptions.dart';
+import '../../models/help_model.dart';
 
 part 'base_response_model.g.dart';
 
@@ -47,9 +50,19 @@ T? _dataFromJson<T>(Object? data) {
 
   /// else if the data not null so it should be a Map
   else if (data is Map<String, dynamic>) {
-    /***   ***/
+    /*** SubmittedFormModel  ***/
     if (T.toString() == SubmittedFormModel.className) {
       return SubmittedFormModel.fromJson(data) as T;
+    }
+
+    /*** HelpModel  ***/
+    if (T.toString() == HelpModel.className) {
+      return HelpModel.fromJson(data) as T;
+    }
+
+    /*** SummaryHelpModel ***/
+    else if (T.toString() == SummaryHelpModel.paginateName) {
+      return PaginateResponseModel<SummaryHelpModel>.fromJson(data) as T;
     }
   }
 

@@ -2,6 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 import '../../../../core/bloc/base_state.dart';
+import '../../../../core/entities/help.dart';
 
 part 'history_state.g.dart';
 
@@ -10,14 +11,18 @@ abstract class HistoryState
     implements Built<HistoryState, HistoryStateBuilder> {
   HistoryState._();
 
-  factory HistoryState([Function(HistoryStateBuilder b) updates]) = _$HistoryState;
+  BuiltList<Help> get helps;
+
+  factory HistoryState([Function(HistoryStateBuilder b) updates]) =
+      _$HistoryState;
 
   factory HistoryState.initial() {
     return HistoryState(
-          (b) => b
+      (b) => b
         ..isLoading = false
         ..message = ''
-        ..error = false,
+        ..error = false
+        ..helps.replace([]),
     );
   }
 
@@ -26,7 +31,7 @@ abstract class HistoryState
     required HistoryState currentState,
   }) {
     return currentState.rebuild(
-          (b) => b
+      (b) => b
         ..isLoading = false
         ..error = true
         ..message = message,
@@ -38,7 +43,7 @@ abstract class HistoryState
     required HistoryState currentState,
   }) {
     return currentState.rebuild(
-          (b) => b
+      (b) => b
         ..isLoading = false
         ..error = false
         ..message = message,
@@ -49,7 +54,7 @@ abstract class HistoryState
     required HistoryState currentState,
   }) {
     return currentState.rebuild(
-          (b) => b..message = '',
+      (b) => b..message = '',
     );
   }
 }

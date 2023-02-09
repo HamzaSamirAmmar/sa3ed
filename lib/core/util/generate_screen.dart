@@ -50,7 +50,9 @@ class GeneratePage {
       case PageName.detailsPage:
         {
           return MaterialPageRoute(
-            builder: (context) => const DetailsPage(),
+            builder: (context) => DetailsPage(
+              arguments: value.arguments as DetailsPageArguments,
+            ),
           );
         }
 
@@ -81,4 +83,16 @@ class PageName {
   static const String aboutUsPage = "/about-us";
   static const String formPage = "/form";
   static const String detailsPage = "/details";
+}
+
+class DetailsPageArguments {
+  final int id;
+  final bool isOffer;
+  final int helpType;
+
+  DetailsPageArguments({
+    required this.id,
+    required this.isOffer,
+    required this.helpType,
+  });
 }

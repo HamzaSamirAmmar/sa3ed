@@ -17,7 +17,7 @@ class FormRemoteDataSourceImp extends BaseRemoteDataSourceImpl
     required bool isOffer,
   }) async =>
       await performPostRequest<SubmittedFormModel>(
-        endpoint: isOffer ? Endpoints.offerHelp : Endpoints.help,
+        endpoint: isOffer ? Endpoints.offerHelp() : Endpoints.help(),
         data: RequestBody.submitHelpForm(form: form),
       );
 }

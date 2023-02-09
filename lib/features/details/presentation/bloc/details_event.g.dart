@@ -143,4 +143,97 @@ class ReInitStateBuilder implements Builder<ReInitState, ReInitStateBuilder> {
   }
 }
 
+class _$GetHelp extends GetHelp {
+  @override
+  final int id;
+  @override
+  final bool isOffer;
+
+  factory _$GetHelp([void Function(GetHelpBuilder)? updates]) =>
+      (new GetHelpBuilder()..update(updates))._build();
+
+  _$GetHelp._({required this.id, required this.isOffer}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, r'GetHelp', 'id');
+    BuiltValueNullFieldError.checkNotNull(isOffer, r'GetHelp', 'isOffer');
+  }
+
+  @override
+  GetHelp rebuild(void Function(GetHelpBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetHelpBuilder toBuilder() => new GetHelpBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetHelp && id == other.id && isOffer == other.isOffer;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, isOffer.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GetHelp')
+          ..add('id', id)
+          ..add('isOffer', isOffer))
+        .toString();
+  }
+}
+
+class GetHelpBuilder implements Builder<GetHelp, GetHelpBuilder> {
+  _$GetHelp? _$v;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  bool? _isOffer;
+  bool? get isOffer => _$this._isOffer;
+  set isOffer(bool? isOffer) => _$this._isOffer = isOffer;
+
+  GetHelpBuilder();
+
+  GetHelpBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _isOffer = $v.isOffer;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GetHelp other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetHelp;
+  }
+
+  @override
+  void update(void Function(GetHelpBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GetHelp build() => _build();
+
+  _$GetHelp _build() {
+    final _$result = _$v ??
+        new _$GetHelp._(
+            id: BuiltValueNullFieldError.checkNotNull(id, r'GetHelp', 'id'),
+            isOffer: BuiltValueNullFieldError.checkNotNull(
+                isOffer, r'GetHelp', 'isOffer'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

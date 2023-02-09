@@ -7,15 +7,18 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sa3ed/features/form/data/models/help_form_model.dart';
 
 class Endpoints {
-  static const String baseUrl = "http://89a3-185-51-134-195.ngrok.io/api";
+  static const String baseUrl = "http://helpus.eu-4.evennode.com/api";
 
   static const String governorates = "/location/all";
 
   static const String helpTypes = "/helpinfo/types";
 
-  static const String help = "/help";
+  static const String helpHistory = "/helpinfo/helps/";
 
-  static const String offerHelp = "/offerHelp";
+  static String help({int? id}) => "/help${(id != null) ? "/$id" : ""}";
+
+  static String offerHelp({int? id}) =>
+      "/offerHelp${(id != null) ? "/$id" : ""}";
 }
 
 class SharedPreferencesKeys {
@@ -43,6 +46,20 @@ class QueryParams {
       if (governorateId != null) "id_city": governorateId,
       if (cityId != null) "id_region": cityId,
       if (helpTypeId != null) "help_type": helpTypeId,
+    };
+  }
+
+  static Map<String, dynamic> helpHistory({
+    required List<String> ids,
+  }) {
+    List<int> convertedIds = List.generate(
+      ids.length,
+      (index) => int.parse(
+        ids[index],
+      ),
+    );
+    return {
+      "ids": convertedIds,
     };
   }
 }
@@ -124,7 +141,8 @@ void message({
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        // backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Colors.teal,
         textColor: Colors.white,
         fontSize: 16.0.sp,
       );

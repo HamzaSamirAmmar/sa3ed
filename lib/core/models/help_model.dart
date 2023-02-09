@@ -8,6 +8,9 @@ part 'help_model.g.dart';
 class HelpModel extends Help {
   static const String className = "HelpModel";
 
+  static const String paginateName =
+      'PaginateResponseModel<HelpModel>';
+
   const HelpModel({
     required super.id,
     required super.cityId,

@@ -8,7 +8,7 @@ part of 'help_offers_state.dart';
 
 class _$HelpOffersState extends HelpOffersState {
   @override
-  final PaginationStateData<Help> helpOffers;
+  final PaginationStateData<SummaryHelp> helpOffers;
   @override
   final bool isLoading;
   @override
@@ -78,10 +78,10 @@ class HelpOffersStateBuilder
     implements Builder<HelpOffersState, HelpOffersStateBuilder> {
   _$HelpOffersState? _$v;
 
-  PaginationStateDataBuilder<Help>? _helpOffers;
-  PaginationStateDataBuilder<Help> get helpOffers =>
-      _$this._helpOffers ??= new PaginationStateDataBuilder<Help>();
-  set helpOffers(PaginationStateDataBuilder<Help>? helpOffers) =>
+  PaginationStateDataBuilder<SummaryHelp>? _helpOffers;
+  PaginationStateDataBuilder<SummaryHelp> get helpOffers =>
+      _$this._helpOffers ??= new PaginationStateDataBuilder<SummaryHelp>();
+  set helpOffers(PaginationStateDataBuilder<SummaryHelp>? helpOffers) =>
       _$this._helpOffers = helpOffers;
 
   bool? _isLoading;

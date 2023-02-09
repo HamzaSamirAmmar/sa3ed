@@ -63,6 +63,157 @@ class ClearMessageBuilder
   }
 }
 
+class _$DeleteHelp extends DeleteHelp {
+  @override
+  final int id;
+  @override
+  final bool isOffer;
+
+  factory _$DeleteHelp([void Function(DeleteHelpBuilder)? updates]) =>
+      (new DeleteHelpBuilder()..update(updates))._build();
+
+  _$DeleteHelp._({required this.id, required this.isOffer}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, r'DeleteHelp', 'id');
+    BuiltValueNullFieldError.checkNotNull(isOffer, r'DeleteHelp', 'isOffer');
+  }
+
+  @override
+  DeleteHelp rebuild(void Function(DeleteHelpBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  DeleteHelpBuilder toBuilder() => new DeleteHelpBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is DeleteHelp && id == other.id && isOffer == other.isOffer;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, isOffer.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'DeleteHelp')
+          ..add('id', id)
+          ..add('isOffer', isOffer))
+        .toString();
+  }
+}
+
+class DeleteHelpBuilder implements Builder<DeleteHelp, DeleteHelpBuilder> {
+  _$DeleteHelp? _$v;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  bool? _isOffer;
+  bool? get isOffer => _$this._isOffer;
+  set isOffer(bool? isOffer) => _$this._isOffer = isOffer;
+
+  DeleteHelpBuilder();
+
+  DeleteHelpBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _isOffer = $v.isOffer;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(DeleteHelp other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$DeleteHelp;
+  }
+
+  @override
+  void update(void Function(DeleteHelpBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  DeleteHelp build() => _build();
+
+  _$DeleteHelp _build() {
+    final _$result = _$v ??
+        new _$DeleteHelp._(
+            id: BuiltValueNullFieldError.checkNotNull(id, r'DeleteHelp', 'id'),
+            isOffer: BuiltValueNullFieldError.checkNotNull(
+                isOffer, r'DeleteHelp', 'isOffer'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GetHelpHistory extends GetHelpHistory {
+  factory _$GetHelpHistory([void Function(GetHelpHistoryBuilder)? updates]) =>
+      (new GetHelpHistoryBuilder()..update(updates))._build();
+
+  _$GetHelpHistory._() : super._();
+
+  @override
+  GetHelpHistory rebuild(void Function(GetHelpHistoryBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetHelpHistoryBuilder toBuilder() =>
+      new GetHelpHistoryBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetHelpHistory;
+  }
+
+  @override
+  int get hashCode {
+    return 342761593;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GetHelpHistory').toString();
+  }
+}
+
+class GetHelpHistoryBuilder
+    implements Builder<GetHelpHistory, GetHelpHistoryBuilder> {
+  _$GetHelpHistory? _$v;
+
+  GetHelpHistoryBuilder();
+
+  @override
+  void replace(GetHelpHistory other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetHelpHistory;
+  }
+
+  @override
+  void update(void Function(GetHelpHistoryBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GetHelpHistory build() => _build();
+
+  _$GetHelpHistory _build() {
+    final _$result = _$v ?? new _$GetHelpHistory._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ReInitState extends ReInitState {
   @override
   final Function? onStateReInitialized;

@@ -28,3 +28,18 @@ abstract class ReInitState extends DetailsEvent
     return ReInitState((b) => b);
   }
 }
+
+abstract class GetHelp extends DetailsEvent
+    implements Built<GetHelp, GetHelpBuilder> {
+  GetHelp._();
+
+  int get id;
+
+  bool get isOffer;
+
+  factory GetHelp([Function(GetHelpBuilder b) updates]) = _$GetHelp;
+
+  factory GetHelp.initial() {
+    return GetHelp((b) => b);
+  }
+}

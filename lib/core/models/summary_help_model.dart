@@ -8,6 +8,9 @@ part 'summary_help_model.g.dart';
 class SummaryHelpModel extends SummaryHelp {
   static const String className = "SummaryHelpModel";
 
+  static const String paginateName =
+      'PaginateResponseModel<SummaryHelpModel>';
+
   const SummaryHelpModel({
     required super.id,
     required super.cityId,

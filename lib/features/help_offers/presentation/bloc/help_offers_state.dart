@@ -3,6 +3,7 @@ import 'package:built_value/built_value.dart';
 import '../../../../core/bloc/base_state.dart';
 import '../../../../core/entities/help.dart';
 import '../../../../core/entities/pagination_state_data.dart';
+import '../../../../core/entities/summary_help.dart';
 
 part 'help_offers_state.g.dart';
 
@@ -11,7 +12,7 @@ abstract class HelpOffersState
     implements Built<HelpOffersState, HelpOffersStateBuilder> {
   HelpOffersState._();
 
-  PaginationStateData<Help> get helpOffers;
+  PaginationStateData<SummaryHelp> get helpOffers;
 
   factory HelpOffersState([Function(HelpOffersStateBuilder b) updates]) =
       _$HelpOffersState;
@@ -23,7 +24,7 @@ abstract class HelpOffersState
         ..message = ''
         ..error = false
         ..helpOffers
-            .replace(PaginationStateData<Help>.initial()),
+            .replace(PaginationStateData<SummaryHelp>.initial()),
     );
   }
 
