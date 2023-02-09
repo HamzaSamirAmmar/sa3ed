@@ -143,4 +143,126 @@ class ReInitStateBuilder implements Builder<ReInitState, ReInitStateBuilder> {
   }
 }
 
+class _$GetAllHelpOffers extends GetAllHelpOffers {
+  @override
+  final int? governorateId;
+  @override
+  final int? cityId;
+  @override
+  final int? helpType;
+  @override
+  final int page;
+
+  factory _$GetAllHelpOffers(
+          [void Function(GetAllHelpOffersBuilder)? updates]) =>
+      (new GetAllHelpOffersBuilder()..update(updates))._build();
+
+  _$GetAllHelpOffers._(
+      {this.governorateId, this.cityId, this.helpType, required this.page})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(page, r'GetAllHelpOffers', 'page');
+  }
+
+  @override
+  GetAllHelpOffers rebuild(void Function(GetAllHelpOffersBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetAllHelpOffersBuilder toBuilder() =>
+      new GetAllHelpOffersBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetAllHelpOffers &&
+        governorateId == other.governorateId &&
+        cityId == other.cityId &&
+        helpType == other.helpType &&
+        page == other.page;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, governorateId.hashCode);
+    _$hash = $jc(_$hash, cityId.hashCode);
+    _$hash = $jc(_$hash, helpType.hashCode);
+    _$hash = $jc(_$hash, page.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GetAllHelpOffers')
+          ..add('governorateId', governorateId)
+          ..add('cityId', cityId)
+          ..add('helpType', helpType)
+          ..add('page', page))
+        .toString();
+  }
+}
+
+class GetAllHelpOffersBuilder
+    implements Builder<GetAllHelpOffers, GetAllHelpOffersBuilder> {
+  _$GetAllHelpOffers? _$v;
+
+  int? _governorateId;
+  int? get governorateId => _$this._governorateId;
+  set governorateId(int? governorateId) =>
+      _$this._governorateId = governorateId;
+
+  int? _cityId;
+  int? get cityId => _$this._cityId;
+  set cityId(int? cityId) => _$this._cityId = cityId;
+
+  int? _helpType;
+  int? get helpType => _$this._helpType;
+  set helpType(int? helpType) => _$this._helpType = helpType;
+
+  int? _page;
+  int? get page => _$this._page;
+  set page(int? page) => _$this._page = page;
+
+  GetAllHelpOffersBuilder();
+
+  GetAllHelpOffersBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _governorateId = $v.governorateId;
+      _cityId = $v.cityId;
+      _helpType = $v.helpType;
+      _page = $v.page;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GetAllHelpOffers other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetAllHelpOffers;
+  }
+
+  @override
+  void update(void Function(GetAllHelpOffersBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GetAllHelpOffers build() => _build();
+
+  _$GetAllHelpOffers _build() {
+    final _$result = _$v ??
+        new _$GetAllHelpOffers._(
+            governorateId: governorateId,
+            cityId: cityId,
+            helpType: helpType,
+            page: BuiltValueNullFieldError.checkNotNull(
+                page, r'GetAllHelpOffers', 'page'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

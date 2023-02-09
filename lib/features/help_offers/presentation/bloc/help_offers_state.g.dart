@@ -8,6 +8,8 @@ part of 'help_offers_state.dart';
 
 class _$HelpOffersState extends HelpOffersState {
   @override
+  final PaginationStateData<Help> helpOffers;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -18,8 +20,13 @@ class _$HelpOffersState extends HelpOffersState {
       (new HelpOffersStateBuilder()..update(updates))._build();
 
   _$HelpOffersState._(
-      {required this.isLoading, required this.error, required this.message})
+      {required this.helpOffers,
+      required this.isLoading,
+      required this.error,
+      required this.message})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        helpOffers, r'HelpOffersState', 'helpOffers');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'HelpOffersState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, r'HelpOffersState', 'error');
@@ -39,6 +46,7 @@ class _$HelpOffersState extends HelpOffersState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is HelpOffersState &&
+        helpOffers == other.helpOffers &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -47,6 +55,7 @@ class _$HelpOffersState extends HelpOffersState {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, helpOffers.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -57,6 +66,7 @@ class _$HelpOffersState extends HelpOffersState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'HelpOffersState')
+          ..add('helpOffers', helpOffers)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -67,6 +77,12 @@ class _$HelpOffersState extends HelpOffersState {
 class HelpOffersStateBuilder
     implements Builder<HelpOffersState, HelpOffersStateBuilder> {
   _$HelpOffersState? _$v;
+
+  PaginationStateDataBuilder<Help>? _helpOffers;
+  PaginationStateDataBuilder<Help> get helpOffers =>
+      _$this._helpOffers ??= new PaginationStateDataBuilder<Help>();
+  set helpOffers(PaginationStateDataBuilder<Help>? helpOffers) =>
+      _$this._helpOffers = helpOffers;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -85,6 +101,7 @@ class HelpOffersStateBuilder
   HelpOffersStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _helpOffers = $v.helpOffers.toBuilder();
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -108,14 +125,28 @@ class HelpOffersStateBuilder
   HelpOffersState build() => _build();
 
   _$HelpOffersState _build() {
-    final _$result = _$v ??
-        new _$HelpOffersState._(
-            isLoading: BuiltValueNullFieldError.checkNotNull(
-                isLoading, r'HelpOffersState', 'isLoading'),
-            error: BuiltValueNullFieldError.checkNotNull(
-                error, r'HelpOffersState', 'error'),
-            message: BuiltValueNullFieldError.checkNotNull(
-                message, r'HelpOffersState', 'message'));
+    _$HelpOffersState _$result;
+    try {
+      _$result = _$v ??
+          new _$HelpOffersState._(
+              helpOffers: helpOffers.build(),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, r'HelpOffersState', 'isLoading'),
+              error: BuiltValueNullFieldError.checkNotNull(
+                  error, r'HelpOffersState', 'error'),
+              message: BuiltValueNullFieldError.checkNotNull(
+                  message, r'HelpOffersState', 'message'));
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'helpOffers';
+        helpOffers.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'HelpOffersState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

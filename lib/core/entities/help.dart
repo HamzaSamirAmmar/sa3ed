@@ -8,6 +8,9 @@ class Help extends Equatable {
 
   final String phone;
 
+  @JsonKey(name: "help_type")
+  final int helpType;
+
   @JsonKey(name: "id_city")
   final int cityId;
 
@@ -31,6 +34,7 @@ class Help extends Equatable {
 
   const Help({
     required this.id,
+    required this.helpType,
     required this.cityId,
     required this.areaId,
     required this.locationDetails,
@@ -44,15 +48,15 @@ class Help extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    cityId,
-    areaId,
-    locationDetails,
-    name,
-    phone,
-    notes,
-    movable,
-    isOffer,
-    createdAt,
-  ];
+        id,
+        cityId,
+        areaId,
+        locationDetails,
+        name,
+        phone,
+        notes,
+        movable,
+        isOffer,
+        createdAt,
+      ];
 }

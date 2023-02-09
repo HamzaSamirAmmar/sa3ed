@@ -34,14 +34,15 @@ class IconsAssets {
 class QueryParams {
   static Map<String, dynamic> paginationParams({
     required int page,
-    int size = 10,
-    String? name,
+    required int? governorateId,
+    required int? cityId,
+    required int? helpTypeId,
   }) {
     return {
-      "is_pagination": 1,
-      "size": size,
       "page": page,
-      "name": name,
+      if (governorateId != null) "id_city": governorateId,
+      if (cityId != null) "id_region": cityId,
+      if (helpTypeId != null) "help_type": helpTypeId,
     };
   }
 }

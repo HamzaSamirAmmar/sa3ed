@@ -11,6 +11,7 @@ class HelpModel extends Help {
   const HelpModel({
     required super.id,
     required super.cityId,
+    required super.helpType,
     required super.areaId,
     required super.locationDetails,
     required super.name,

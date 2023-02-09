@@ -28,8 +28,8 @@ abstract class PaginationStateData<T>
           ..items.replace([])
           ..isLoading = false
           ..isFinished = false
-          ..currentPage = 0
-          ..total = 0,
+          ..currentPage = 1
+          ..total = 1,
       );
 
   bool paginationStateCanGetMoreData() {

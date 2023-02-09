@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../entities/paginate_list.dart';
+import '../../models/summary_help_model.dart';
 
 part 'paginate_response_model.g.dart';
 
@@ -32,10 +33,10 @@ class _Converter<T> implements JsonConverter<T, Object?> {
     debugPrint('T is ${T.toString()}');
 
     if (json is Map<String, dynamic>) {
-      /***  ***/
-      // if (T.toString() == .className) {
-      //   return .fromJson(json) as T;
-      // }
+      /*** SummeryHelpModel ***/
+      if (T.toString() == SummaryHelpModel.className) {
+        return SummaryHelpModel.fromJson(json) as T;
+      }
     }
 
     throw Exception('parse error');

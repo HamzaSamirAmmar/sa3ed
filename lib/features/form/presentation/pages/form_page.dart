@@ -63,7 +63,7 @@ class _FormPageState extends State<FormPage> {
       bloc: _bloc,
       listener: (context, state) {
         if (state.allSuccess) {
-          Navigator.pushNamed(context, PageName.homePage);
+          Navigator.pop(context);
         }
       },
       child: BlocBuilder<HomeBloc, HomeState>(
