@@ -63,6 +63,66 @@ class ClearMessageBuilder
   }
 }
 
+class _$GetHelpfulInformation extends GetHelpfulInformation {
+  factory _$GetHelpfulInformation(
+          [void Function(GetHelpfulInformationBuilder)? updates]) =>
+      (new GetHelpfulInformationBuilder()..update(updates))._build();
+
+  _$GetHelpfulInformation._() : super._();
+
+  @override
+  GetHelpfulInformation rebuild(
+          void Function(GetHelpfulInformationBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetHelpfulInformationBuilder toBuilder() =>
+      new GetHelpfulInformationBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetHelpfulInformation;
+  }
+
+  @override
+  int get hashCode {
+    return 75948716;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GetHelpfulInformation').toString();
+  }
+}
+
+class GetHelpfulInformationBuilder
+    implements Builder<GetHelpfulInformation, GetHelpfulInformationBuilder> {
+  _$GetHelpfulInformation? _$v;
+
+  GetHelpfulInformationBuilder();
+
+  @override
+  void replace(GetHelpfulInformation other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetHelpfulInformation;
+  }
+
+  @override
+  void update(void Function(GetHelpfulInformationBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GetHelpfulInformation build() => _build();
+
+  _$GetHelpfulInformation _build() {
+    final _$result = _$v ?? new _$GetHelpfulInformation._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ReInitState extends ReInitState {
   @override
   final Function? onStateReInitialized;

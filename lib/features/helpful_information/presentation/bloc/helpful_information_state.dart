@@ -2,6 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 import '../../../../core/bloc/base_state.dart';
+import '../../domain/entities/helpful_information.dart';
 
 part 'helpful_information_state.g.dart';
 
@@ -9,6 +10,8 @@ abstract class HelpfulInformationState
     with BaseState
     implements Built<HelpfulInformationState, HelpfulInformationStateBuilder> {
   HelpfulInformationState._();
+
+  HelpfulInformation? get info;
 
   factory HelpfulInformationState(
           [Function(HelpfulInformationStateBuilder b) updates]) =

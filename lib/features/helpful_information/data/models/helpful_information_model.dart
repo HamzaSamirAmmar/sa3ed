@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../domain/entities/helpful_information.dart';
 
-part '../../../help_requests/data/models/submitted_form_model.g.dart';
+part 'helpful_information_model.g.dart';
 
 @JsonSerializable()
 class HelpfulInformationModel extends HelpfulInformation {

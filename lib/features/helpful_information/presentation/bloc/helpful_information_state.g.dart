@@ -8,6 +8,8 @@ part of 'helpful_information_state.dart';
 
 class _$HelpfulInformationState extends HelpfulInformationState {
   @override
+  final HelpfulInformation? info;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -19,7 +21,10 @@ class _$HelpfulInformationState extends HelpfulInformationState {
       (new HelpfulInformationStateBuilder()..update(updates))._build();
 
   _$HelpfulInformationState._(
-      {required this.isLoading, required this.error, required this.message})
+      {this.info,
+      required this.isLoading,
+      required this.error,
+      required this.message})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'HelpfulInformationState', 'isLoading');
@@ -42,6 +47,7 @@ class _$HelpfulInformationState extends HelpfulInformationState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is HelpfulInformationState &&
+        info == other.info &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -50,6 +56,7 @@ class _$HelpfulInformationState extends HelpfulInformationState {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, info.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -60,6 +67,7 @@ class _$HelpfulInformationState extends HelpfulInformationState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'HelpfulInformationState')
+          ..add('info', info)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -71,6 +79,10 @@ class HelpfulInformationStateBuilder
     implements
         Builder<HelpfulInformationState, HelpfulInformationStateBuilder> {
   _$HelpfulInformationState? _$v;
+
+  HelpfulInformation? _info;
+  HelpfulInformation? get info => _$this._info;
+  set info(HelpfulInformation? info) => _$this._info = info;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -89,6 +101,7 @@ class HelpfulInformationStateBuilder
   HelpfulInformationStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _info = $v.info;
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -114,6 +127,7 @@ class HelpfulInformationStateBuilder
   _$HelpfulInformationState _build() {
     final _$result = _$v ??
         new _$HelpfulInformationState._(
+            info: info,
             isLoading: BuiltValueNullFieldError.checkNotNull(
                 isLoading, r'HelpfulInformationState', 'isLoading'),
             error: BuiltValueNullFieldError.checkNotNull(
