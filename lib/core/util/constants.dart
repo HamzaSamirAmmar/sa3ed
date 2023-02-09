@@ -13,6 +13,8 @@ class Endpoints {
 
   static const String helpTypes = "/helpinfo/types";
 
+  static const String helpfulInformation = "/info";
+
   static const String helpHistory = "/helpinfo/helps/";
 
   static String help({int? id}) => "/help${(id != null) ? "/$id" : ""}";

@@ -22,7 +22,7 @@ class KeyTitleValueRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            "$keyTitle: ",
+            keyTitle == "-" ? "- " : "$keyTitle: ",
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.bold,

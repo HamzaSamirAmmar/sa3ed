@@ -57,7 +57,7 @@ class HelpOffersBloc extends Bloc<HelpOffersEvent, HelpOffersState> {
         /*** GetAllHelpOffers ***/
         if (event is GetAllHelpOffers) {
           if (!state.helpOffers.isFinished) {
-            if (state.helpOffers.currentPage == 0) {
+            if (state.helpOffers.currentPage == 1) {
               emit(state.rebuild((b) => b..isLoading = true));
             } else {
               emit(state.rebuild((b) => b..helpOffers.isLoading = true));
@@ -91,7 +91,7 @@ class HelpOffersBloc extends Bloc<HelpOffersEvent, HelpOffersState> {
                       ..helpOffers.items.addAll(helpOffers.data)
                       ..helpOffers.currentPage = b.helpOffers.currentPage! + 1
                       ..helpOffers.isFinished =
-                          b.helpOffers.currentPage! >= helpOffers.count,
+                          b.helpOffers.currentPage! > helpOffers.count,
                   ),
                 ),
               },

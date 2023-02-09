@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/util/generate_screen.dart';
+import '../../../../core/widgets/KeyValueRow.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../../../injection.dart';
 import '../../../home/presentation/bloc/home_bloc.dart';
@@ -56,18 +58,67 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
               body: Stack(
                 children: [
-                  if (state.help != null)
-                    SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(state.help!.name),
-                          Text(state.help!.createdAt),
-                          Text(state.help!.locationDetails),
-                          Text(state.help!.notes),
-                        ],
-                      ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        if (state.help != null)
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20.w,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 20.h),
+                                KeyTitleValueRow(
+                                  keyTitle:
+                                      state.help!.isOffer ? "- نوع العرض" : "- نوع الطلب",
+                                  value: homeState.helpTypes
+                                      .firstWhere((b) => b.id == state.help!.helpType)
+                                      .name,
+                                ),
+                                KeyTitleValueRow(
+                                  keyTitle: "- المحافظة",
+                                  value: homeState.governorates
+                                      .firstWhere((b) => b.id == state.help!.cityId)
+                                      .name,
+                                ),
+                                KeyTitleValueRow(
+                                  keyTitle: "- المنقطة",
+                                  value: homeState.governorates
+                                      .firstWhere((b) => b.id == state.help!.cityId)
+                                      .cities
+                                      .firstWhere((b) => b.id == state.help!.areaId)
+                                      .name,
+                                ),
+                                KeyTitleValueRow(
+                                  keyTitle: "- العنوان",
+                                  value: state.help!.locationDetails,
+                                ),
+                                KeyTitleValueRow(
+                                  keyTitle: "- الاسم",
+                                  value: state.help!.name,
+                                ),
+                                KeyTitleValueRow(
+                                  keyTitle: "- رقم التواصل",
+                                  value: state.help!.phone,
+                                ),
+                                KeyTitleValueRow(
+                                  keyTitle: "- الملاحظات",
+                                  value:
+                                  state.help!.notes.isEmpty ? "لا يوجد" : state.help!.notes,
+                                ),
+                                KeyTitleValueRow(
+                                  keyTitle: "- التاريخ",
+                                  value:
+                                      "${state.help!.createdAt.substring(0, 10)} - ${state.help!.createdAt.substring(11, 16)}",
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
                     ),
+                  ),
                   if (state.isLoading) const Loader(),
                 ],
               ),

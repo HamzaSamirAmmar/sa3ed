@@ -51,141 +51,135 @@ class _HistoryPageState extends State<HistoryPage> {
               body: Stack(
                 children: [
                   SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 20.h,
-                        horizontal: 20.w,
-                      ),
-                      child: Column(
-                        children: [
-                          if (state.helps.isNotEmpty)
-                            ...state.helps.map(
-                              (help) => CustomContainer(
-                                widget: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    KeyTitleValueRow(
-                                      keyTitle: "النوع",
-                                      value: help.isOffer
-                                          ? "عرض مساعدة"
-                                          : "طلب مساعدة",
+                    child: Column(
+                      children: [
+                        if (state.helps.isNotEmpty)
+                          ...state.helps.map(
+                            (help) => CustomContainer(
+                              widget: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  KeyTitleValueRow(
+                                    keyTitle: "النوع",
+                                    value: help.isOffer
+                                        ? "عرض مساعدة"
+                                        : "طلب مساعدة",
+                                  ),
+                                  KeyTitleValueRow(
+                                    keyTitle: help.isOffer
+                                        ? "نوع العرض"
+                                        : "نوع الطلب",
+                                    value: homeState.helpTypes
+                                        .firstWhere(
+                                            (b) => b.id == help.helpType)
+                                        .name,
+                                  ),
+                                  KeyTitleValueRow(
+                                    keyTitle: "المحافظة",
+                                    value: homeState.governorates
+                                        .firstWhere(
+                                            (b) => b.id == help.cityId)
+                                        .name,
+                                  ),
+                                  KeyTitleValueRow(
+                                    keyTitle: "المنقطة",
+                                    value: homeState.governorates
+                                        .firstWhere(
+                                            (b) => b.id == help.cityId)
+                                        .cities
+                                        .firstWhere(
+                                            (b) => b.id == help.areaId)
+                                        .name,
+                                  ),
+                                  KeyTitleValueRow(
+                                    keyTitle: "العنوان",
+                                    value: help.locationDetails,
+                                  ),
+                                  KeyTitleValueRow(
+                                    keyTitle: "الاسم",
+                                    value: help.name,
+                                  ),
+                                  KeyTitleValueRow(
+                                    keyTitle: "رقم التواصل",
+                                    value: help.phone,
+                                  ),
+                                  KeyTitleValueRow(
+                                    keyTitle: "الملاحظات",
+                                    value: help.notes.isEmpty
+                                        ? "لا يوجد"
+                                        : help.notes,
+                                  ),
+                                  KeyTitleValueRow(
+                                    keyTitle: "التاريخ",
+                                    value:
+                                        "${help.createdAt.substring(0, 10)} - ${help.createdAt.substring(11, 16)}",
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          Colors.redAccent.withOpacity(0.9),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25),
+                                      ),
                                     ),
-                                    KeyTitleValueRow(
-                                      keyTitle: help.isOffer
-                                          ? "نوع العرض"
-                                          : "نوع الطلب",
-                                      value: homeState.helpTypes
-                                          .firstWhere(
-                                              (b) => b.id == help.helpType)
-                                          .name,
-                                    ),
-                                    KeyTitleValueRow(
-                                      keyTitle: "المحافظة",
-                                      value: homeState.governorates
-                                          .firstWhere(
-                                              (b) => b.id == help.cityId)
-                                          .name,
-                                    ),
-                                    KeyTitleValueRow(
-                                      keyTitle: "المنقطة",
-                                      value: homeState.governorates
-                                          .firstWhere(
-                                              (b) => b.id == help.cityId)
-                                          .cities
-                                          .firstWhere(
-                                              (b) => b.id == help.areaId)
-                                          .name,
-                                    ),
-                                    KeyTitleValueRow(
-                                      keyTitle: "العنوان",
-                                      value: help.locationDetails,
-                                    ),
-                                    KeyTitleValueRow(
-                                      keyTitle: "الاسم",
-                                      value: help.name,
-                                    ),
-                                    KeyTitleValueRow(
-                                      keyTitle: "رقم التواصل",
-                                      value: help.phone,
-                                    ),
-                                    KeyTitleValueRow(
-                                      keyTitle: "الملاحظات",
-                                      value: help.notes.isEmpty
-                                          ? "لا يوجد"
-                                          : help.notes,
-                                    ),
-                                    KeyTitleValueRow(
-                                      keyTitle: "التاريخ",
-                                      value:
-                                          "${help.createdAt.substring(0, 10)} - ${help.createdAt.substring(11, 16)}",
-                                    ),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            Colors.redAccent.withOpacity(0.9),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: const Text("تأكيد الحذف"),
+                                          content: const Text(
+                                            "هل أنت متأكد من أنك تريد حذف هذا العنصر؟",
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text("لا"),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                _bloc.addDeleteHelpEvent(
+                                                  id: help.id,
+                                                  isOffer: help.isOffer,
+                                                );
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text("نعم"),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                            title: const Text("تأكيد الحذف"),
-                                            content: const Text(
-                                              "هل أنت متأكد من أنك تريد حذف هذا العنصر؟",
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(25),
-                                            ),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text("لا"),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  _bloc.addDeleteHelpEvent(
-                                                    id: help.id,
-                                                    isOffer: help.isOffer,
-                                                  );
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text("نعم"),
-                                              ),
-                                            ],
+                                      );
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 5.h,
+                                            left: 5.w,
                                           ),
-                                        );
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 5.h,
-                                              left: 5.w,
-                                            ),
-                                            child: const Text('حذف'),
-                                          ),
-                                          const Center(
-                                            child: Icon(Icons.delete_outline),
-                                          ),
-                                        ],
-                                      ),
+                                          child: const Text('حذف'),
+                                        ),
+                                        const Center(
+                                          child: Icon(Icons.delete_outline),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            )
-                        ],
-                      ),
+                            ),
+                          )
+                      ],
                     ),
                   ),
                   if (state.isLoading) const Loader(),

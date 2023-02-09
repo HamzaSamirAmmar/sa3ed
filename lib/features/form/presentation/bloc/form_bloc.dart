@@ -77,7 +77,7 @@ class FormBloc extends Bloc<FormEvent, FormState> {
              _storeHelpIdUseCase(submittedForm.id),
               emit(
                 FormState.success(
-                  message: "تمت عملية الإرسال بنجاح",
+                  message: "تمت عملية الإضافة بنجاح",
                   currentState: state,
                 ),
               ),

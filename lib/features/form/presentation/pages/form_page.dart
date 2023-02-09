@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sa3ed/core/util/constants.dart';
 import 'package:sa3ed/core/util/generate_screen.dart';
+import 'package:sa3ed/core/widgets/KeyValueRow.dart';
 import 'package:sa3ed/features/form/data/models/help_form_model.dart';
 
 import '../../../../core/widgets/custom_drop_down_button.dart';
@@ -63,7 +64,17 @@ class _FormPageState extends State<FormPage> {
       bloc: _bloc,
       listener: (context, state) {
         if (state.allSuccess) {
-          Navigator.of(context).pop();
+          _bloc.reInitState(
+            onStateReInitialized: () {
+              Navigator.of(context).pop();
+              message(
+                context: context,
+                message: state.message,
+                isError: state.error,
+                bloc: _bloc,
+              );
+            },
+          );
         }
       },
       child: BlocBuilder<HomeBloc, HomeState>(
@@ -72,12 +83,6 @@ class _FormPageState extends State<FormPage> {
           return BlocBuilder<FormBloc, bloc_form_state.FormState>(
             bloc: _bloc,
             builder: (context, blocFromState) {
-              message(
-                context: context,
-                message: blocFromState.message,
-                isError: blocFromState.error,
-                bloc: _bloc,
-              );
               return GestureDetector(
                 onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
                 child: Scaffold(
@@ -100,6 +105,46 @@ class _FormPageState extends State<FormPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(height: 20.h),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .tertiary
+                                        .withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 20.w,
+                                      right: 20.w,
+                                      top: 20.h,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "ملاحظات هامة",
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                        SizedBox(height: 10.h),
+                                        KeyTitleValueRow(
+                                          keyTitle: "-",
+                                          value: widget.isHelpRequest
+                                              ? "أنت الآن على وشك إضافة طلب مساعدة، فرّج الله همك."
+                                              : "أنت الآن على وشك إضافة عرض مساعدة، أخلف الله عليك وجزاك الله خيراً.",
+                                        ),
+                                        KeyTitleValueRow(
+                                          keyTitle: "-",
+                                          value: widget.isHelpRequest
+                                              ? "أنتم من يساهم بنجاح هذا التطبيق، لذلك نرجوا منك الإلتزام بحذف طلب المساعدة عندما يتم تلبيتها، وذلك من أجل بقاء البيانات محدثة بشكل دائم، ولكي لا تتلقى اتصالات تعرض عليك المساعدة بعد أن تصبح لست بحاجة لها."
+                                              : "أنتم من يساهم بنجاح هذا التطبيق، لذلك نرجوا منك الإلتزام بحذف عرض المساعدة عندما تريد إنهاء تقديم هذه المساعدة، وذلك من أجل بقاء البيانات محدثة بشكل دائم، ولكي لا تتلقى اتصالات أو طلبات بعد أن تكون قد انتيهت من تقديم هذه المساعدة.",
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10.h),
                                 CustomDropDownButton<HelpType>(
                                   isValid: _isHelpTypeValid,
                                   label: widget.isHelpRequest

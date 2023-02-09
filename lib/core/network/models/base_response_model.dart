@@ -6,6 +6,7 @@ import 'package:sa3ed/core/models/summary_help_model.dart';
 import 'package:sa3ed/core/network/models/paginate_response_model.dart';
 import 'package:sa3ed/features/form/data/models/submitted_form_model.dart';
 
+import '../../../features/helpful_information/data/models/helpful_information_model.dart';
 import '../../error/exceptions.dart';
 import '../../models/help_model.dart';
 
@@ -58,6 +59,11 @@ T? _dataFromJson<T>(Object? data) {
     /*** HelpModel  ***/
     if (T.toString() == HelpModel.className) {
       return HelpModel.fromJson(data) as T;
+    }
+
+    /*** HelpfulInformationModel  ***/
+    if (T.toString() == HelpfulInformationModel.className) {
+      return HelpfulInformationModel.fromJson(data) as T;
     }
 
     /*** SummaryHelpModel ***/

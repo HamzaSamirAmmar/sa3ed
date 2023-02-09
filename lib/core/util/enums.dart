@@ -1,2 +1,0 @@
-/// *** HelpType *** ///
-enum HelpType {none}

@@ -8,6 +8,8 @@ part of 'help_requests_state.dart';
 
 class _$HelpRequestsState extends HelpRequestsState {
   @override
+  final PaginationStateData<SummaryHelp> helpRequests;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -19,8 +21,13 @@ class _$HelpRequestsState extends HelpRequestsState {
       (new HelpRequestsStateBuilder()..update(updates))._build();
 
   _$HelpRequestsState._(
-      {required this.isLoading, required this.error, required this.message})
+      {required this.helpRequests,
+      required this.isLoading,
+      required this.error,
+      required this.message})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        helpRequests, r'HelpRequestsState', 'helpRequests');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'HelpRequestsState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, r'HelpRequestsState', 'error');
@@ -40,6 +47,7 @@ class _$HelpRequestsState extends HelpRequestsState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is HelpRequestsState &&
+        helpRequests == other.helpRequests &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -48,6 +56,7 @@ class _$HelpRequestsState extends HelpRequestsState {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, helpRequests.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -58,6 +67,7 @@ class _$HelpRequestsState extends HelpRequestsState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'HelpRequestsState')
+          ..add('helpRequests', helpRequests)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -68,6 +78,12 @@ class _$HelpRequestsState extends HelpRequestsState {
 class HelpRequestsStateBuilder
     implements Builder<HelpRequestsState, HelpRequestsStateBuilder> {
   _$HelpRequestsState? _$v;
+
+  PaginationStateDataBuilder<SummaryHelp>? _helpRequests;
+  PaginationStateDataBuilder<SummaryHelp> get helpRequests =>
+      _$this._helpRequests ??= new PaginationStateDataBuilder<SummaryHelp>();
+  set helpRequests(PaginationStateDataBuilder<SummaryHelp>? helpRequests) =>
+      _$this._helpRequests = helpRequests;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -86,6 +102,7 @@ class HelpRequestsStateBuilder
   HelpRequestsStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _helpRequests = $v.helpRequests.toBuilder();
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -109,14 +126,28 @@ class HelpRequestsStateBuilder
   HelpRequestsState build() => _build();
 
   _$HelpRequestsState _build() {
-    final _$result = _$v ??
-        new _$HelpRequestsState._(
-            isLoading: BuiltValueNullFieldError.checkNotNull(
-                isLoading, r'HelpRequestsState', 'isLoading'),
-            error: BuiltValueNullFieldError.checkNotNull(
-                error, r'HelpRequestsState', 'error'),
-            message: BuiltValueNullFieldError.checkNotNull(
-                message, r'HelpRequestsState', 'message'));
+    _$HelpRequestsState _$result;
+    try {
+      _$result = _$v ??
+          new _$HelpRequestsState._(
+              helpRequests: helpRequests.build(),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, r'HelpRequestsState', 'isLoading'),
+              error: BuiltValueNullFieldError.checkNotNull(
+                  error, r'HelpRequestsState', 'error'),
+              message: BuiltValueNullFieldError.checkNotNull(
+                  message, r'HelpRequestsState', 'message'));
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'helpRequests';
+        helpRequests.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'HelpRequestsState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

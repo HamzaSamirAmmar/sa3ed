@@ -6,20 +6,21 @@ import '../../../../core/entities/paginate_list.dart';
 import '../../../../core/entities/summary_help.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../repositories/help_offers_repository.dart';
+import '../repositories/help_requests_repository.dart';
 
 @lazySingleton
-class GetHelpOffersUseCase
-    implements UseCase<PaginateList<SummaryHelp>, ParamsGetHelpOffersUseCase> {
-  final HelpOffersRepository _repository;
+class GetHelpRequestsUseCase
+    implements
+        UseCase<PaginateList<SummaryHelp>, ParamsGetHelpRequestsUseCase> {
+  final HelpRequestsRepository _repository;
 
-  GetHelpOffersUseCase(this._repository);
+  GetHelpRequestsUseCase(this._repository);
 
   @override
   Future<Either<Failure, PaginateList<SummaryHelp>>> call(
-    ParamsGetHelpOffersUseCase params,
+    ParamsGetHelpRequestsUseCase params,
   ) async =>
-      await _repository.getHelpOffers(
+      await _repository.getHelpRequests(
         page: params.page,
         governorateId: params.governorateId,
         cityId: params.cityId,
@@ -27,7 +28,7 @@ class GetHelpOffersUseCase
       );
 }
 
-class ParamsGetHelpOffersUseCase extends Equatable {
+class ParamsGetHelpRequestsUseCase extends Equatable {
   final int page;
 
   final int? governorateId;
@@ -36,7 +37,7 @@ class ParamsGetHelpOffersUseCase extends Equatable {
 
   final int? helpTypeId;
 
-  const ParamsGetHelpOffersUseCase({
+  const ParamsGetHelpRequestsUseCase({
     required this.page,
     required this.governorateId,
     required this.cityId,

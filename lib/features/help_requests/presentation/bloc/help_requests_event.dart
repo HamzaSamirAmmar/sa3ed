@@ -28,3 +28,23 @@ abstract class ReInitState extends HelpRequestsEvent
     return ReInitState((b) => b);
   }
 }
+
+abstract class GetAllHelpRequests extends HelpRequestsEvent
+    implements Built<GetAllHelpRequests, GetAllHelpRequestsBuilder> {
+  GetAllHelpRequests._();
+
+  int? get governorateId;
+
+  int? get cityId;
+
+  int? get helpType;
+
+  int get page;
+
+  factory GetAllHelpRequests([Function(GetAllHelpRequestsBuilder b) updates]) =
+      _$GetAllHelpRequests;
+
+  factory GetAllHelpRequests.initial() {
+    return GetAllHelpRequests((b) => b);
+  }
+}

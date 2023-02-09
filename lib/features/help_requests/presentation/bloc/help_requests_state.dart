@@ -2,6 +2,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 import '../../../../core/bloc/base_state.dart';
+import '../../../../core/entities/pagination_state_data.dart';
+import '../../../../core/entities/summary_help.dart';
 
 part 'help_requests_state.g.dart';
 
@@ -9,6 +11,8 @@ abstract class HelpRequestsState
     with BaseState
     implements Built<HelpRequestsState, HelpRequestsStateBuilder> {
   HelpRequestsState._();
+
+  PaginationStateData<SummaryHelp> get helpRequests;
 
   factory HelpRequestsState([Function(HelpRequestsStateBuilder b) updates]) =
       _$HelpRequestsState;
@@ -18,7 +22,9 @@ abstract class HelpRequestsState
       (b) => b
         ..isLoading = false
         ..message = ''
-        ..error = false,
+        ..error = false
+        ..helpRequests
+            .replace(PaginationStateData<SummaryHelp>.initial()),
     );
   }
 

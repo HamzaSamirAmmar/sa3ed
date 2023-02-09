@@ -1,3 +1,9 @@
-import '../../../../core/data/base_repository.dart';
+import 'package:dartz/dartz.dart';
 
-abstract class HelpfulInformationRepository extends BaseRepository {}
+import '../../../../core/data/base_repository.dart';
+import '../../../../core/error/failures.dart';
+import '../entities/helpful_information.dart';
+
+abstract class HelpfulInformationRepository extends BaseRepository {
+  Future<Either<Failure, HelpfulInformation>> getHelpfulInformation();
+}

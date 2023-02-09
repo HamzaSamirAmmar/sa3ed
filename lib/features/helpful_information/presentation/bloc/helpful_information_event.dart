@@ -9,10 +9,22 @@ abstract class ClearMessage extends HelpfulInformationEvent
   ClearMessage._();
 
   factory ClearMessage([Function(ClearMessageBuilder b) updates]) =
-      _$ClearMessage;
+  _$ClearMessage;
 
   factory ClearMessage.initial() {
     return ClearMessage((b) => b);
+  }
+}
+
+abstract class GetHelpfulInformation extends HelpfulInformationEvent
+    implements Built<GetHelpfulInformation, GetHelpfulInformationBuilder> {
+  GetHelpfulInformation._();
+
+  factory GetHelpfulInformation([Function(GetHelpfulInformationBuilder b) updates]) =
+      _$GetHelpfulInformation;
+
+  factory GetHelpfulInformation.initial() {
+    return GetHelpfulInformation((b) => b);
   }
 }
 
