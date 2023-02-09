@@ -10,6 +10,8 @@ abstract class FormState
     implements Built<FormState, FormStateBuilder> {
   FormState._();
 
+  bool get allSuccess;
+
   factory FormState([Function(FormStateBuilder b) updates]) = _$FormState;
 
   factory FormState.initial() {
@@ -17,7 +19,8 @@ abstract class FormState
       (b) => b
         ..isLoading = false
         ..message = ''
-        ..error = false,
+        ..error = false
+        ..allSuccess = false,
     );
   }
 
@@ -39,6 +42,7 @@ abstract class FormState
   }) {
     return currentState.rebuild(
       (b) => b
+        ..allSuccess = true
         ..isLoading = false
         ..error = false
         ..message = message,

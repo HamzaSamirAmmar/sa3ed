@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/util/mixins.dart';
 
-class City extends Equatable implements Selectable {
+class HelpType extends Equatable  implements Selectable{
   final int id;
   final String name;
 
-  const City({
+  const HelpType({
     required this.id,
     required this.name,
   });

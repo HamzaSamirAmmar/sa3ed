@@ -1,9 +1,11 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:sa3ed/core/util/constants.dart';
-import 'package:sa3ed/features/home/presentation/pages/home_page.dart';
+
+import '../../../../core/util/constants.dart';
+import '../../../../injection.dart';
+import '../../../home/presentation/bloc/home_bloc.dart';
+import '../../../home/presentation/pages/home_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -13,6 +15,15 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final _homeBloc = sl<HomeBloc>();
+
+  @override
+  void initState() {
+    _homeBloc.addGetAllGovernoratesEvent();
+    _homeBloc.addGetAllHelpTypesEvent();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

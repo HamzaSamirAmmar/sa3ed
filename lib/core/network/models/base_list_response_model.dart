@@ -3,6 +3,9 @@ library base_list_response_model;
 import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../features/home/data/models/city_model.dart';
+import '../../../features/home/data/models/governorate_model.dart';
+import '../../../features/home/data/models/help_type_model.dart';
 import '../../error/exceptions.dart';
 
 part 'base_list_response_model.g.dart';
@@ -41,10 +44,20 @@ class _Converter<T> implements JsonConverter<T, Object> {
     debugPrint('t is ${T.toString()}');
 
     if (json is Map<String, dynamic>) {
-      /***  ***/
-      // if (T.toString() == .className) {
-      //   return .fromJson(json) as T;
-      // }
+      /*** CityModel ***/
+      if (T.toString() == CityModel.className) {
+        return CityModel.fromJson(json) as T;
+      }
+
+      /*** GovernorateModel ***/
+      if (T.toString() == GovernorateModel.className) {
+        return GovernorateModel.fromJson(json) as T;
+      }
+
+      /*** HelpTypeModel ***/
+      if (T.toString() == HelpTypeModel.className) {
+        return HelpTypeModel.fromJson(json) as T;
+      }
     }
 
     debugPrint('_dataFromJson: parse error (BaseListResponseModel)');

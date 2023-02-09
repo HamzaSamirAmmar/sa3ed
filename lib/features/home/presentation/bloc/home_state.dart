@@ -3,6 +3,7 @@ import 'package:built_value/built_value.dart';
 
 import '../../../../core/bloc/base_state.dart';
 import '../../domain/entities/governorate.dart';
+import '../../domain/entities/help_type.dart';
 
 part 'home_state.g.dart';
 
@@ -13,6 +14,8 @@ abstract class HomeState
 
   BuiltList<Governorate> get governorates;
 
+  BuiltList<HelpType> get helpTypes;
+
   factory HomeState([Function(HomeStateBuilder b) updates]) = _$HomeState;
 
   factory HomeState.initial() {
@@ -21,7 +24,8 @@ abstract class HomeState
         ..isLoading = false
         ..message = ''
         ..error = false
-        ..governorates.replace([]),
+        ..governorates.replace([])
+        ..helpTypes.replace([]),
     );
   }
 

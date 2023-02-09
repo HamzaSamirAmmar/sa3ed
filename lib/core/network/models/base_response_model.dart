@@ -2,6 +2,7 @@ library base_response_model;
 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:sa3ed/features/form/data/models/submitted_form_model.dart';
 
 import '../../error/exceptions.dart';
 
@@ -47,9 +48,9 @@ T? _dataFromJson<T>(Object? data) {
   /// else if the data not null so it should be a Map
   else if (data is Map<String, dynamic>) {
     /***   ***/
-    // if (T.toString() == .className) {
-    //   return .fromJson(data) as T;
-    // }
+    if (T.toString() == SubmittedFormModel.className) {
+      return SubmittedFormModel.fromJson(data) as T;
+    }
   }
 
   debugPrint('_dataFromJson: parse error (BaseResponseModel)');

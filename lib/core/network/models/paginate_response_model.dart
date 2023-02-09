@@ -10,22 +10,14 @@ part 'paginate_response_model.g.dart';
 
 @JsonSerializable()
 class PaginateResponseModel<T extends Equatable> extends PaginateList {
-  @JsonKey(name: 'totalElements')
-  final int count;
-  @JsonKey(name: 'totalPages')
-  final int numPages;
-
   @_Converter()
   final List<T> data;
 
   const PaginateResponseModel({
-    required this.count,
-    required this.numPages,
+    required super.count,
     required this.data,
   }) : super(
           data: data,
-          page: numPages,
-          count: count,
         );
 
   factory PaginateResponseModel.fromJson(Map<String, dynamic> json) =>

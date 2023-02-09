@@ -55,9 +55,9 @@ class BaseRepositoryImpl implements BaseRepository {
     try {
       final T t = await body();
       return Right(t);
-    } on HandledException catch (e) {
-      return Left(
-        CacheFailure(error: e.error),
+    } catch (e) {
+      return const Left(
+        CacheFailure(error: "Cache Failure"),
       );
     }
   }

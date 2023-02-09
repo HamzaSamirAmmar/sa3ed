@@ -1,13 +1,14 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 class PaginateList<T extends Equatable> extends Equatable {
   final List<T> data;
+
+  @JsonKey(name: "last_page")
   final int count;
-  final int page;
 
   const PaginateList({
     required this.data,
-    required this.page,
     required this.count,
   }) : super();
 
@@ -24,5 +25,5 @@ class PaginateList<T extends Equatable> extends Equatable {
   }
 
   @override
-  List<Object?> get props => [data, page];
+  List<Object?> get props => [data, count];
 }

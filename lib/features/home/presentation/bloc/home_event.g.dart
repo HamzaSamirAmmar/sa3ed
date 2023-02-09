@@ -123,6 +123,64 @@ class GetAllGovernoratesBuilder
   }
 }
 
+class _$GetAllHelpTypes extends GetAllHelpTypes {
+  factory _$GetAllHelpTypes([void Function(GetAllHelpTypesBuilder)? updates]) =>
+      (new GetAllHelpTypesBuilder()..update(updates))._build();
+
+  _$GetAllHelpTypes._() : super._();
+
+  @override
+  GetAllHelpTypes rebuild(void Function(GetAllHelpTypesBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetAllHelpTypesBuilder toBuilder() =>
+      new GetAllHelpTypesBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetAllHelpTypes;
+  }
+
+  @override
+  int get hashCode {
+    return 361984305;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GetAllHelpTypes').toString();
+  }
+}
+
+class GetAllHelpTypesBuilder
+    implements Builder<GetAllHelpTypes, GetAllHelpTypesBuilder> {
+  _$GetAllHelpTypes? _$v;
+
+  GetAllHelpTypesBuilder();
+
+  @override
+  void replace(GetAllHelpTypes other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetAllHelpTypes;
+  }
+
+  @override
+  void update(void Function(GetAllHelpTypesBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GetAllHelpTypes build() => _build();
+
+  _$GetAllHelpTypes _build() {
+    final _$result = _$v ?? new _$GetAllHelpTypes._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ReInitState extends ReInitState {
   @override
   final Function? onStateReInitialized;

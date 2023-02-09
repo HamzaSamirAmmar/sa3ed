@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../core/util/mixins.dart';
 import 'city.dart';
 
-class Governorate extends Equatable {
+class Governorate extends Equatable  implements Selectable{
   final int id;
   final String name;
 
@@ -18,4 +19,7 @@ class Governorate extends Equatable {
 
   @override
   List<Object?> get props => [id, name, cities];
+
+  @override
+  String get selectValue => name;
 }

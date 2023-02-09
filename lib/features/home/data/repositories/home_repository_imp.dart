@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sa3ed/features/home/domain/entities/help_type.dart';
 
 import '../../../../core/data/base_repository.dart';
 import '../../../../core/error/failures.dart';
@@ -24,5 +25,11 @@ class HomeRepositoryImp extends BaseRepositoryImpl implements HomeRepository {
   Future<Either<Failure, List<Governorate>>> getAllGovernorates() async =>
       await remoteRequest(
         () => _remote.getAllGovernorates(),
+      );
+
+  @override
+  Future<Either<Failure, List<HelpType>>> getAllHelpTypes() async =>
+      await remoteRequest(
+        () => _remote.getAllHelpTypes(),
       );
 }

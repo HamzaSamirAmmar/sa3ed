@@ -8,6 +8,8 @@ part of 'form_state.dart';
 
 class _$FormState extends FormState {
   @override
+  final bool allSuccess;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -18,8 +20,13 @@ class _$FormState extends FormState {
       (new FormStateBuilder()..update(updates))._build();
 
   _$FormState._(
-      {required this.isLoading, required this.error, required this.message})
+      {required this.allSuccess,
+      required this.isLoading,
+      required this.error,
+      required this.message})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        allSuccess, r'FormState', 'allSuccess');
     BuiltValueNullFieldError.checkNotNull(isLoading, r'FormState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, r'FormState', 'error');
     BuiltValueNullFieldError.checkNotNull(message, r'FormState', 'message');
@@ -36,6 +43,7 @@ class _$FormState extends FormState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is FormState &&
+        allSuccess == other.allSuccess &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -44,6 +52,7 @@ class _$FormState extends FormState {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, allSuccess.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -54,6 +63,7 @@ class _$FormState extends FormState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'FormState')
+          ..add('allSuccess', allSuccess)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -63,6 +73,10 @@ class _$FormState extends FormState {
 
 class FormStateBuilder implements Builder<FormState, FormStateBuilder> {
   _$FormState? _$v;
+
+  bool? _allSuccess;
+  bool? get allSuccess => _$this._allSuccess;
+  set allSuccess(bool? allSuccess) => _$this._allSuccess = allSuccess;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -81,6 +95,7 @@ class FormStateBuilder implements Builder<FormState, FormStateBuilder> {
   FormStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _allSuccess = $v.allSuccess;
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -106,6 +121,8 @@ class FormStateBuilder implements Builder<FormState, FormStateBuilder> {
   _$FormState _build() {
     final _$result = _$v ??
         new _$FormState._(
+            allSuccess: BuiltValueNullFieldError.checkNotNull(
+                allSuccess, r'FormState', 'allSuccess'),
             isLoading: BuiltValueNullFieldError.checkNotNull(
                 isLoading, r'FormState', 'isLoading'),
             error: BuiltValueNullFieldError.checkNotNull(

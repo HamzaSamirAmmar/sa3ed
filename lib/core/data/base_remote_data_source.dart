@@ -192,7 +192,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
       debugPrint("Switching result\n");
 
       /// 2.1: result is true
-      if (result.status == 200) {
+      if (result.status ?? false) {
         debugPrint("Result is true\n");
         return result.data as T; // TODO check if the data is null
       }
@@ -275,7 +275,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
       debugPrint("Switching result\n");
 
       /// 2.1: result is true
-      if (result.status == 200) {
+      if (result.status ?? false) {
         debugPrint("Result is true\n");
         return result.data!;
       }

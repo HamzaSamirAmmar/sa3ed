@@ -1,15 +1,24 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sa3ed/features/form/data/models/help_form_model.dart';
 
 class Endpoints {
-  static const String baseUrl = "http://www.sa3ed.com/api";
+  static const String baseUrl = "http://89a3-185-51-134-195.ngrok.io/api";
 
   static const String governorates = "/location/all";
+
+  static const String helpTypes = "/helpinfo/types";
+
+  static const String help = "/help";
+
+  static const String offerHelp = "/offerHelp";
 }
 
-class LocalStorageKeys {
+class SharedPreferencesKeys {
   static const postIds = "post_ids";
 }
 
@@ -39,12 +48,10 @@ class QueryParams {
 
 class RequestBody {
   /// ** Signup ** ///
-  static FormData signUp({
-    required String gsm,
+  static String submitHelpForm({
+    required HelpFormModel form,
   }) {
-    return FormData.fromMap({
-      "gsm": gsm,
-    });
+    return json.encode(form.toJson());
   }
 }
 
@@ -93,7 +100,9 @@ void message({
 }) {
   // For debug only
   debugPrint('Message is "$message"');
-  debugPrint(bloc.state.toString());
+  if (bloc != null) {
+    debugPrint(bloc.state.toString());
+  }
   // ************* //
 
   if (message.isNotEmpty) {
@@ -122,7 +131,9 @@ void message({
 
     /// set message to '' (empty), for avoid print it again when state is changed
     /// or change the value of 'statusChanged' to false
-    bloc.clearMessage();
+    if (bloc != null) {
+      bloc.clearMessage();
+    }
   }
 }
 

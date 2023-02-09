@@ -1,14 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sa3ed/core/usecases/usecase.dart';
 
+import '../../../../core/usecases/usecase.dart';
 import '../../domain/use_cases/get_all_governorates_use_case.dart';
+import '../../domain/use_cases/get_all_help_types_use_case.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
-@injectable
+@lazySingleton
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetAllGovernoratesUseCase _getAllGovernoratesUseCase;
+  final GetAllHelpTypesUseCase _getAllHelpTypesUseCase;
 
   void clearMessage() {
     add(ClearMessage());
@@ -26,9 +28,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     add(GetAllGovernorates());
   }
 
+  void addGetAllHelpTypesEvent() {
+    add(GetAllHelpTypes());
+  }
+
   @factoryMethod
   HomeBloc(
     this._getAllGovernoratesUseCase,
+    this._getAllHelpTypesUseCase,
   ) : super(HomeState.initial()) {
     on<HomeEvent>(
       (event, emit) async {
@@ -52,17 +59,50 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           final result = await _getAllGovernoratesUseCase(NoParams());
 
           result.fold(
-            (failure) => emit(
-              HomeState.failure(
-                message: failure.error,
-                currentState: state,
-              ),
-            ),
+            (failure) {
+              emit(
+                HomeState.failure(
+                  message: failure.error,
+                  currentState: state,
+                ),
+              );
+              Future.delayed(const Duration(seconds: 3)).whenComplete(
+                () => addGetAllGovernoratesEvent(),
+              );
+            },
             (governorates) => emit(
               state.rebuild(
                 (b) => b
                   ..isLoading = false
                   ..governorates.replace(governorates),
+              ),
+            ),
+          );
+        }
+
+        /*** GetAllHelpTypes **/
+        if (event is GetAllHelpTypes) {
+          emit(state.rebuild((b) => b..isLoading = true));
+
+          final result = await _getAllHelpTypesUseCase(NoParams());
+
+          result.fold(
+            (failure) {
+              emit(
+                HomeState.failure(
+                  message: failure.error,
+                  currentState: state,
+                ),
+              );
+              Future.delayed(const Duration(seconds: 3)).whenComplete(
+                () => addGetAllHelpTypesEvent(),
+              );
+            },
+            (helpTypes) => emit(
+              state.rebuild(
+                (b) => b
+                  ..isLoading = false
+                  ..helpTypes.replace(helpTypes),
               ),
             ),
           );

@@ -28,6 +28,18 @@ abstract class GetAllGovernorates extends HomeEvent
   }
 }
 
+abstract class GetAllHelpTypes extends HomeEvent
+    implements Built<GetAllHelpTypes, GetAllHelpTypesBuilder> {
+  GetAllHelpTypes._();
+
+  factory GetAllHelpTypes([Function(GetAllHelpTypesBuilder b) updates]) =
+      _$GetAllHelpTypes;
+
+  factory GetAllHelpTypes.initial() {
+    return GetAllHelpTypes((b) => b);
+  }
+}
+
 abstract class ReInitState extends HomeEvent
     implements Built<ReInitState, ReInitStateBuilder> {
   ReInitState._();

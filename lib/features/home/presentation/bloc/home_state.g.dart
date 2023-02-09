@@ -10,6 +10,8 @@ class _$HomeState extends HomeState {
   @override
   final BuiltList<Governorate> governorates;
   @override
+  final BuiltList<HelpType> helpTypes;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -21,12 +23,14 @@ class _$HomeState extends HomeState {
 
   _$HomeState._(
       {required this.governorates,
+      required this.helpTypes,
       required this.isLoading,
       required this.error,
       required this.message})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         governorates, r'HomeState', 'governorates');
+    BuiltValueNullFieldError.checkNotNull(helpTypes, r'HomeState', 'helpTypes');
     BuiltValueNullFieldError.checkNotNull(isLoading, r'HomeState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, r'HomeState', 'error');
     BuiltValueNullFieldError.checkNotNull(message, r'HomeState', 'message');
@@ -44,6 +48,7 @@ class _$HomeState extends HomeState {
     if (identical(other, this)) return true;
     return other is HomeState &&
         governorates == other.governorates &&
+        helpTypes == other.helpTypes &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -53,6 +58,7 @@ class _$HomeState extends HomeState {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, governorates.hashCode);
+    _$hash = $jc(_$hash, helpTypes.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -64,6 +70,7 @@ class _$HomeState extends HomeState {
   String toString() {
     return (newBuiltValueToStringHelper(r'HomeState')
           ..add('governorates', governorates)
+          ..add('helpTypes', helpTypes)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -79,6 +86,12 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
       _$this._governorates ??= new ListBuilder<Governorate>();
   set governorates(ListBuilder<Governorate>? governorates) =>
       _$this._governorates = governorates;
+
+  ListBuilder<HelpType>? _helpTypes;
+  ListBuilder<HelpType> get helpTypes =>
+      _$this._helpTypes ??= new ListBuilder<HelpType>();
+  set helpTypes(ListBuilder<HelpType>? helpTypes) =>
+      _$this._helpTypes = helpTypes;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -98,6 +111,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
     final $v = _$v;
     if ($v != null) {
       _governorates = $v.governorates.toBuilder();
+      _helpTypes = $v.helpTypes.toBuilder();
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -126,6 +140,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
       _$result = _$v ??
           new _$HomeState._(
               governorates: governorates.build(),
+              helpTypes: helpTypes.build(),
               isLoading: BuiltValueNullFieldError.checkNotNull(
                   isLoading, r'HomeState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(
@@ -137,6 +152,8 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
       try {
         _$failedField = 'governorates';
         governorates.build();
+        _$failedField = 'helpTypes';
+        helpTypes.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'HomeState', _$failedField, e.toString());
