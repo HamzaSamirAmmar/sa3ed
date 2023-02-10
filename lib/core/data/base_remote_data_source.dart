@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../features/splash/presentation/bloc/splash_bloc.dart';
+import '../../injection.dart';
 import '../error/exceptions.dart';
 import '../error/status_code_handler.dart';
 import '../network/models/base_list_response_model.dart';
@@ -69,7 +71,10 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   }) async {
     debugPrint("token is $token \n");
     debugPrint("performPostRequest\nSending request...\n");
-
+    final bloc = sl<SplashBloc>();
+    if (bloc.state.baseUrl != null) {
+      dio.options.baseUrl = bloc.state.baseUrl!;
+    }
     /// Sending the request
     return _handleRequest<T>(
       request: dio.post(
@@ -90,7 +95,10 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   }) async {
     debugPrint("token is $token \n");
     debugPrint("performPutRequest\nSending request...\n");
-
+    final bloc = sl<SplashBloc>();
+    if (bloc.state.baseUrl != null) {
+      dio.options.baseUrl = bloc.state.baseUrl!;
+    }
     /// Sending the request
     return _handleRequest<T>(
       request: dio.put(
@@ -111,7 +119,10 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   }) async {
     debugPrint("token is $token \n");
     debugPrint("performDeleteRequest\nSending request...\n");
-
+    final bloc = sl<SplashBloc>();
+    if (bloc.state.baseUrl != null) {
+      dio.options.baseUrl = bloc.state.baseUrl!;
+    }
     /// Sending the request
     return _handleRequest<T>(
       request: dio.delete(
@@ -131,6 +142,10 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   }) async {
     debugPrint("token is $token \n");
     debugPrint("performGetRequest\nSending request...\n");
+    final bloc = sl<SplashBloc>();
+    if (bloc.state.baseUrl != null) {
+      dio.options.baseUrl = bloc.state.baseUrl!;
+    }
 
     /// Sending the request
     return _handleRequest<T>(
@@ -152,6 +167,10 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   }) async {
     debugPrint("token is $token \n");
     debugPrint("performGetListRequest\nSending request...\n");
+    final bloc = sl<SplashBloc>();
+    if (bloc.state.baseUrl != null) {
+      dio.options.baseUrl = bloc.state.baseUrl!;
+    }
 
     /// Sending the request
     debugPrint("Sending request...\n");

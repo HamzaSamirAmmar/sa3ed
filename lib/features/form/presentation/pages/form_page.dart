@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sa3ed/core/util/constants.dart';
-import 'package:sa3ed/core/util/generate_screen.dart';
 import 'package:sa3ed/core/widgets/KeyValueRow.dart';
 import 'package:sa3ed/features/form/data/models/help_form_model.dart';
 
@@ -47,8 +46,6 @@ class _FormPageState extends State<FormPage> {
   bool _isHelpTypeValid = true;
 
   bool _isGovernorateValid = true;
-
-  bool _isCityValid = true;
 
   final TextEditingController _location = TextEditingController();
 
@@ -191,9 +188,7 @@ class _FormPageState extends State<FormPage> {
                                 ),
                                 if (_governorate != null)
                                   CustomDropDownButton<City>(
-                                    isValid: _isCityValid,
-                                    errorText: "المنطقة مطلوبة",
-                                    label: "ما هي المنطقة؟",
+                                    label: "ما هي المنطقة الأقرب لك؟",
                                     selectedItem: _city,
                                     defaultValue: "الرجاء اختيار المنطقة",
                                     items: homeState.governorates
@@ -201,12 +196,6 @@ class _FormPageState extends State<FormPage> {
                                             governorate.id == _governorate!.id)
                                         .cities,
                                     onItemSelected: (City type) {
-                                      if (!_isCityValid) {
-                                        setState(() {
-                                          _city = type;
-                                          _isCityValid = true;
-                                        });
-                                      }
                                       if (type != _city) {
                                         setState(() {
                                           _city = type;
@@ -297,22 +286,18 @@ class _FormPageState extends State<FormPage> {
                                             _isHelpTypeValid = false;
                                           });
                                         }
-                                        if (_city == null) {
-                                          setState(() {
-                                            _isCityValid = false;
-                                          });
-                                        }
                                         if ((_formKey.currentState
                                                     ?.validate() ??
                                                 false) &&
-                                            _isCityValid &&
                                             _isHelpTypeValid &&
                                             _isGovernorateValid) {
                                           _bloc.addSubmitHelpFormEvent(
                                             form: HelpFormModel(
                                               helpType: _helpType!.id,
                                               cityId: _governorate!.id,
-                                              areaId: _city!.id,
+                                              areaId: (_city == null)
+                                                  ? null
+                                                  : _city!.id,
                                               locationDetails: _location.text,
                                               name: _name.text,
                                               phone: _phoneNumber.text,

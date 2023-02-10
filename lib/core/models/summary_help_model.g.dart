@@ -11,7 +11,7 @@ SummaryHelpModel _$SummaryHelpModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       cityId: json['id_city'] as int,
       helpType: json['help_type'] as int,
-      areaId: json['id_area'] as int,
+      areaId: json['id_area'] as int?,
       createdAt: json['created_at'] as String,
     );
 

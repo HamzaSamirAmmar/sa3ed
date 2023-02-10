@@ -8,7 +8,7 @@ class SummaryHelp extends Equatable {
   final int cityId;
 
   @JsonKey(name: "id_area")
-  final int areaId;
+  final int? areaId;
 
   @JsonKey(name: "help_type")
   final int helpType;

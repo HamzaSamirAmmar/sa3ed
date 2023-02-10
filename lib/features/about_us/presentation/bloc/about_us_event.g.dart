@@ -63,6 +63,62 @@ class ClearMessageBuilder
   }
 }
 
+class _$GetAboutUs extends GetAboutUs {
+  factory _$GetAboutUs([void Function(GetAboutUsBuilder)? updates]) =>
+      (new GetAboutUsBuilder()..update(updates))._build();
+
+  _$GetAboutUs._() : super._();
+
+  @override
+  GetAboutUs rebuild(void Function(GetAboutUsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetAboutUsBuilder toBuilder() => new GetAboutUsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetAboutUs;
+  }
+
+  @override
+  int get hashCode {
+    return 461827293;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GetAboutUs').toString();
+  }
+}
+
+class GetAboutUsBuilder implements Builder<GetAboutUs, GetAboutUsBuilder> {
+  _$GetAboutUs? _$v;
+
+  GetAboutUsBuilder();
+
+  @override
+  void replace(GetAboutUs other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetAboutUs;
+  }
+
+  @override
+  void update(void Function(GetAboutUsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GetAboutUs build() => _build();
+
+  _$GetAboutUs _build() {
+    final _$result = _$v ?? new _$GetAboutUs._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ReInitState extends ReInitState {
   @override
   final Function? onStateReInitialized;

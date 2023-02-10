@@ -2,6 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 import '../../../../core/bloc/base_state.dart';
+import '../../domain/entities/about_us.dart';
 
 part 'about_us_state.g.dart';
 
@@ -9,6 +10,8 @@ abstract class AboutUsState
     with BaseState
     implements Built<AboutUsState, AboutUsStateBuilder> {
   AboutUsState._();
+
+  AboutUs? get aboutUs;
 
   factory AboutUsState([Function(AboutUsStateBuilder b) updates]) =
       _$AboutUsState;

@@ -94,6 +94,12 @@ class _HelpOffersPageState extends State<HelpOffersPage> {
         return BlocBuilder<HelpOffersBloc, HelpOffersState>(
           bloc: _bloc,
           builder: (context, state) {
+            message(
+              context: context,
+              message: state.message,
+              isError: state.error,
+              bloc: _bloc,
+            );
             _bloc.state.helpOffers.checkPaginationInitialExtent(
               addEvent: () {
                 _fetchFilteredData();
@@ -228,6 +234,7 @@ class _HelpOffersPageState extends State<HelpOffersPage> {
                             ],
                           ),
                         ),
+                        if(state.helpOffers.items.isNotEmpty)
                         ...state.helpOffers.items.map(
                           (helpOffer) => GestureDetector(
                             onTap: () {
@@ -258,16 +265,22 @@ class _HelpOffersPageState extends State<HelpOffersPage> {
                                             (b) => b.id == helpOffer.cityId)
                                         .name,
                                   ),
-                                  KeyTitleValueRow(
-                                    keyTitle: "المنقطة",
-                                    value: homeState.governorates
-                                        .firstWhere(
-                                            (b) => b.id == helpOffer.cityId)
-                                        .cities
-                                        .firstWhere(
-                                            (b) => b.id == helpOffer.areaId)
-                                        .name,
-                                  ),
+                                  if (helpOffer.areaId != null)
+                                    KeyTitleValueRow(
+                                      keyTitle: "المنطقة",
+                                      value: homeState.governorates
+                                          .firstWhere((b) =>
+                                      b.id == helpOffer.cityId)
+                                          .cities
+                                          .firstWhere((b) =>
+                                      b.id == helpOffer.areaId)
+                                          .name,
+                                    ),
+                                  if (helpOffer.areaId == null)
+                                    const KeyTitleValueRow(
+                                      keyTitle: "المنطقة",
+                                      value: 'غير محددة',
+                                    ),
                                   KeyTitleValueRow(
                                     keyTitle: "التاريخ",
                                     value:
@@ -302,7 +315,7 @@ class _HelpOffersPageState extends State<HelpOffersPage> {
                   if (state.helpOffers.items.isEmpty && !state.isLoading)
                     Padding(
                       padding: EdgeInsets.only(
-                        top: 200.h,
+                        top: 100.h,
                       ),
                       child: const EmptyPage(
                         iconPath: IconsAssets.donation,

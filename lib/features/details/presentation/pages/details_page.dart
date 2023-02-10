@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sa3ed/core/util/constants.dart';
 
 import '../../../../core/util/generate_screen.dart';
 import '../../../../core/widgets/KeyValueRow.dart';
@@ -45,6 +46,12 @@ class _DetailsPageState extends State<DetailsPage> {
         return BlocBuilder<DetailsBloc, DetailsState>(
           bloc: _bloc,
           builder: (context, state) {
+            message(
+              context: context,
+              message: state.message,
+              isError: state.error,
+              bloc: _bloc,
+            );
             return Scaffold(
               backgroundColor: Theme.of(context).colorScheme.background,
               appBar: AppBar(
@@ -71,26 +78,37 @@ class _DetailsPageState extends State<DetailsPage> {
                               children: [
                                 SizedBox(height: 20.h),
                                 KeyTitleValueRow(
-                                  keyTitle:
-                                      state.help!.isOffer ? "- نوع العرض" : "- نوع الطلب",
+                                  keyTitle: state.help!.isOffer
+                                      ? "- نوع العرض"
+                                      : "- نوع الطلب",
                                   value: homeState.helpTypes
-                                      .firstWhere((b) => b.id == state.help!.helpType)
+                                      .firstWhere(
+                                          (b) => b.id == state.help!.helpType)
                                       .name,
                                 ),
                                 KeyTitleValueRow(
                                   keyTitle: "- المحافظة",
                                   value: homeState.governorates
-                                      .firstWhere((b) => b.id == state.help!.cityId)
+                                      .firstWhere(
+                                          (b) => b.id == state.help!.cityId)
                                       .name,
                                 ),
+                                if(state.help!.areaId != null)
                                 KeyTitleValueRow(
-                                  keyTitle: "- المنقطة",
+                                  keyTitle: "- المنطقة",
                                   value: homeState.governorates
-                                      .firstWhere((b) => b.id == state.help!.cityId)
+                                      .firstWhere(
+                                          (b) => b.id == state.help!.cityId)
                                       .cities
-                                      .firstWhere((b) => b.id == state.help!.areaId)
+                                      .firstWhere(
+                                          (b) => b.id == state.help!.areaId)
                                       .name,
                                 ),
+                                if(state.help!.areaId == null)
+                                  const KeyTitleValueRow(
+                                    keyTitle: "- المنطقة",
+                                    value: "غير محددة",
+                                  ),
                                 KeyTitleValueRow(
                                   keyTitle: "- العنوان",
                                   value: state.help!.locationDetails,
@@ -105,8 +123,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                 ),
                                 KeyTitleValueRow(
                                   keyTitle: "- الملاحظات",
-                                  value:
-                                  state.help!.notes.isEmpty ? "لا يوجد" : state.help!.notes,
+                                  value: state.help!.notes.isEmpty
+                                      ? "لا يوجد"
+                                      : state.help!.notes,
                                 ),
                                 KeyTitleValueRow(
                                   keyTitle: "- التاريخ",

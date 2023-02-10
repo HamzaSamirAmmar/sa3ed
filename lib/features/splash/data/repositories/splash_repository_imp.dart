@@ -1,6 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/data/base_repository.dart';
+import '../../../../core/error/failures.dart';
+import '../../domain/entities/version.dart';
 import '../../domain/repositories/splash_repository.dart';
 import '../data_sources/local/splash_local_data_source.dart';
 import '../data_sources/remote/splash_remote_data_source.dart';
@@ -17,4 +20,10 @@ class SplashRepositoryImp extends BaseRepositoryImpl
     required super.baseLocalDataSource,
     required super.networkInfo,
   });
+
+  @override
+  Future<Either<Failure, Version>> checkVersion() async =>
+      await remoteRequest<Version>(
+        () => _remote.checkVersion(),
+      );
 }

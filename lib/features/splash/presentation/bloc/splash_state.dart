@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 import '../../../../core/bloc/base_state.dart';
@@ -10,11 +9,17 @@ abstract class SplashState
     implements Built<SplashState, SplashStateBuilder> {
   SplashState._();
 
+  String? get apkUrl;
+
+  String? get baseUrl;
+
   factory SplashState([Function(SplashStateBuilder b) updates]) = _$SplashState;
 
   factory SplashState.initial() {
     return SplashState(
       (b) => b
+        ..apkUrl = null
+        ..baseUrl = b.baseUrl
         ..isLoading = false
         ..message = ''
         ..error = false,

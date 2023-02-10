@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final List<Widget> _pages = [
     const HelpRequestsPage(),
     const HelpOffersPage(),
@@ -37,77 +38,77 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        title: const Text("سَاعِد"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(PageName.aboutUsPage);
-            },
-            icon: const Icon(MdiIcons.informationOutline),
-            tooltip: "من نحن",
-          ),
-        ],
-      ),
-      floatingActionButton: (_selectedIndex == 1 || _selectedIndex == 0)
-          ? FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: AppBar(
+          title: const Text("سَاعِد"),
+          actions: [
+            IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(
-                  PageName.formPage,
-                  arguments: _selectedIndex == 0,
-                );
+                Navigator.of(context).pushNamed(PageName.aboutUsPage);
               },
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              child: Icon(
-                MdiIcons.plus,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
+              icon: const Icon(MdiIcons.informationOutline),
+              tooltip: "من نحن",
+            ),
+          ],
+        ),
+        floatingActionButton: (_selectedIndex == 1 || _selectedIndex == 0)
+            ? FloatingActionButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    PageName.formPage,
+                    arguments: _selectedIndex == 0,
+                  );
+                },
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Icon(
+                  MdiIcons.plus,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              )
+            : null,
+        body: _pages[_selectedIndex],
+        bottomNavigationBar: GNav(
+          selectedIndex: _selectedIndex,
+          onTabChange: _changePage,
+          haptic: true,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          tabBorderRadius: 25.r,
+          tabMargin: EdgeInsets.symmetric(
+            vertical: 10.h,
+            horizontal: 5.w,
+          ),
+          curve: Curves.easeIn,
+          duration: const Duration(milliseconds: 300),
+          gap: 5,
+          color: Theme.of(context).colorScheme.background,
+          activeColor: Theme.of(context).colorScheme.secondary,
+          iconSize: 24.sp,
+          tabBackgroundColor: Theme.of(context).colorScheme.primary,
+          padding: EdgeInsets.symmetric(
+            horizontal: 19.w,
+            vertical: 10.h,
+          ),
+          // navigation bar padding
+          tabs: const [
+            GButton(
+              icon: MdiIcons.handshakeOutline,
+              text: 'طلبات المساعدة',
+            ),
+            GButton(
+              icon: MdiIcons.handHeartOutline,
+              text: 'عروض المساعدة',
+            ),
+            GButton(
+              icon: MdiIcons.history,
+              text: 'بياناتي',
+            ),
+            GButton(
+              icon: MdiIcons.contactsOutline,
+              text: 'معلومات هامة',
             )
-          : null,
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: GNav(
-        selectedIndex: _selectedIndex,
-        onTabChange: _changePage,
-        haptic: true,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        tabBorderRadius: 25.r,
-        tabMargin: EdgeInsets.symmetric(
-          vertical: 10.h,
-          horizontal: 5.w,
+          ],
         ),
-        curve: Curves.easeIn,
-        duration: const Duration(milliseconds: 300),
-        gap: 5,
-        color: Theme.of(context).colorScheme.background,
-        activeColor: Theme.of(context).colorScheme.secondary,
-        iconSize: 24.sp,
-        tabBackgroundColor: Theme.of(context).colorScheme.primary,
-        padding: EdgeInsets.symmetric(
-          horizontal: 19.w,
-          vertical: 10.h,
-        ),
-        // navigation bar padding
-        tabs: const [
-          GButton(
-            icon: MdiIcons.handshakeOutline,
-            text: 'طلبات المساعدة',
-          ),
-          GButton(
-            icon: MdiIcons.handHeartOutline,
-            text: 'عروض المساعدة',
-          ),
-          GButton(
-            icon: MdiIcons.history,
-            text: 'بياناتي',
-          ),
-          GButton(
-            icon: MdiIcons.contactsOutline,
-            text: 'معلومات هامة',
-          )
-        ],
-      ),
-    );
+      );
   }
 }

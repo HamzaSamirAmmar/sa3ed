@@ -1,3 +1,9 @@
-import '../../../../core/data/base_repository.dart';
+import 'package:dartz/dartz.dart';
 
-abstract class SplashRepository extends BaseRepository {}
+import '../../../../core/data/base_repository.dart';
+import '../../../../core/error/failures.dart';
+import '../entities/version.dart';
+
+abstract class SplashRepository extends BaseRepository {
+  Future<Either<Failure, Version>> checkVersion();
+}

@@ -5,6 +5,7 @@ import 'package:sa3ed/core/util/constants.dart';
 import 'package:sa3ed/core/widgets/loader.dart';
 import 'package:sa3ed/features/helpful_information/presentation/bloc/helpful_information_bloc.dart';
 
+import '../../../../core/widgets/empty_page.dart';
 import '../../../../injection.dart';
 import '../bloc/helpful_information_state.dart';
 
@@ -50,6 +51,12 @@ class _HelpfulInformationPageState extends State<HelpfulInformationPage> {
                 ),
               ),
               if (state.isLoading) const Loader(),
+              if (!state.isLoading && state.info == null)
+                EmptyPage(
+                  iconPath: IconsAssets.houseInsurance,
+                  description:
+                      "فشل تحميل المعلومات المطلوبة، الرجاء التحقق من إتصالك بالانترنت وإعادة المحاولة",
+                )
             ],
           ),
         );

@@ -15,7 +15,7 @@ class Help extends Equatable {
   final int cityId;
 
   @JsonKey(name: "id_area")
-  final int areaId;
+  final int? areaId;
 
   @JsonKey(name: "location_details")
   final String locationDetails;

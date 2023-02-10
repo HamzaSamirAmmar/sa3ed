@@ -8,6 +8,8 @@ part of 'about_us_state.dart';
 
 class _$AboutUsState extends AboutUsState {
   @override
+  final AboutUs? aboutUs;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -18,7 +20,10 @@ class _$AboutUsState extends AboutUsState {
       (new AboutUsStateBuilder()..update(updates))._build();
 
   _$AboutUsState._(
-      {required this.isLoading, required this.error, required this.message})
+      {this.aboutUs,
+      required this.isLoading,
+      required this.error,
+      required this.message})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'AboutUsState', 'isLoading');
@@ -37,6 +42,7 @@ class _$AboutUsState extends AboutUsState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is AboutUsState &&
+        aboutUs == other.aboutUs &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -45,6 +51,7 @@ class _$AboutUsState extends AboutUsState {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, aboutUs.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -55,6 +62,7 @@ class _$AboutUsState extends AboutUsState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'AboutUsState')
+          ..add('aboutUs', aboutUs)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -65,6 +73,10 @@ class _$AboutUsState extends AboutUsState {
 class AboutUsStateBuilder
     implements Builder<AboutUsState, AboutUsStateBuilder> {
   _$AboutUsState? _$v;
+
+  AboutUs? _aboutUs;
+  AboutUs? get aboutUs => _$this._aboutUs;
+  set aboutUs(AboutUs? aboutUs) => _$this._aboutUs = aboutUs;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -83,6 +95,7 @@ class AboutUsStateBuilder
   AboutUsStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _aboutUs = $v.aboutUs;
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -108,6 +121,7 @@ class AboutUsStateBuilder
   _$AboutUsState _build() {
     final _$result = _$v ??
         new _$AboutUsState._(
+            aboutUs: aboutUs,
             isLoading: BuiltValueNullFieldError.checkNotNull(
                 isLoading, r'AboutUsState', 'isLoading'),
             error: BuiltValueNullFieldError.checkNotNull(

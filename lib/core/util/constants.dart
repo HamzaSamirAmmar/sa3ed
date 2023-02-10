@@ -7,20 +7,24 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sa3ed/features/form/data/models/help_form_model.dart';
 
 class Endpoints {
-  static const String baseUrl = "http://helpus.eu-4.evennode.com/api";
+  static const String baseUrl = "http://helpus.eu-4.evennode.com";
 
-  static const String governorates = "/location/all";
+  static const String governorates = "/api/location/all";
 
-  static const String helpTypes = "/helpinfo/types";
+  static const String helpTypes = "/api/helpinfo/types";
 
-  static const String helpfulInformation = "/info";
+  static const String helpfulInformation = "/api/info";
 
-  static const String helpHistory = "/helpinfo/helps/";
+  static const String helpHistory = "/api/helpinfo/helps/";
 
-  static String help({int? id}) => "/help${(id != null) ? "/$id" : ""}";
+  static const String version = "/api/settings";
+
+  static const String aboutUs = "/api/info/aboutus";
+
+  static String help({int? id}) => "/api/help${(id != null) ? "/$id" : ""}";
 
   static String offerHelp({int? id}) =>
-      "/offerHelp${(id != null) ? "/$id" : ""}";
+      "/api/offerHelp${(id != null) ? "/$id" : ""}";
 }
 
 class SharedPreferencesKeys {
@@ -46,7 +50,7 @@ class QueryParams {
     return {
       "page": page,
       if (governorateId != null) "id_city": governorateId,
-      if (cityId != null) "id_region": cityId,
+      if (cityId != null) "id_area": cityId,
       if (helpTypeId != null) "help_type": helpTypeId,
     };
   }
@@ -67,7 +71,7 @@ class QueryParams {
 }
 
 class RequestBody {
-  /// ** Signup ** ///
+  /// ** submitHelpForm ** ///
   static String submitHelpForm({
     required HelpFormModel form,
   }) {
@@ -101,14 +105,14 @@ class GetOptions {
 }
 
 class ErrorMessage {
-  static const String somethingWentWrong = "something_went_wrong";
-  static const String error400 = "error400";
-  static const String error401 = "error401";
-  static const String error403 = "error403";
-  static const String error404 = "error404";
-  static const String error412 = "error412";
-  static const String error500 = "error500";
-  static const String error503 = "error503";
+  static const String somethingWentWrong = "خطأ غير متوقع، يرجى التحقق من إتصالك بالانترنت";
+  static const String error400 = "الطلب المرسل غير صحيح";
+  static const String error401 = "فشلت عملية المصادقة مع الخادم";
+  static const String error403 = "ليس لديك اذن للوصول إلى المورد المطلوب";
+  static const String error404 = "لم يتم العثور على العنوان المطلوب";
+  static const String error412 = "البيانات المدخلة غير صحيحة";
+  static const String error500 = "حدث خطأ عام في الخادم";
+  static const String error503 = "الخدمة المطلوبة غير متاحة";
 }
 
 void message({

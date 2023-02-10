@@ -1,4 +1,6 @@
 import 'package:injectable/injectable.dart';
+import 'package:sa3ed/core/util/constants.dart';
+import 'package:sa3ed/features/splash/data/models/version_model.dart';
 
 import '../../../../../core/data/base_remote_data_source.dart';
 import 'splash_remote_data_source.dart';
@@ -7,4 +9,10 @@ import 'splash_remote_data_source.dart';
 class SplashRemoteDataSourceImp extends BaseRemoteDataSourceImpl
     implements SplashRemoteDataSource {
   SplashRemoteDataSourceImp({required super.dio});
+
+  @override
+  Future<VersionModel> checkVersion() async =>
+      await performGetRequest<VersionModel>(
+        endpoint: Endpoints.version,
+      );
 }

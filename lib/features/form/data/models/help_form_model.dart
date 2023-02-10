@@ -17,7 +17,7 @@ class HelpFormModel {
   final int cityId;
 
   @JsonKey(name: "id_area")
-  final int areaId;
+  final int? areaId;
 
   @JsonKey(name: "location_details")
   final String locationDetails;

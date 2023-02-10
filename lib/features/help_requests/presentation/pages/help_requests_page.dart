@@ -95,6 +95,12 @@ class _HelpRequestsPageState extends State<HelpRequestsPage> {
         return BlocBuilder<HelpRequestsBloc, HelpRequestsState>(
           bloc: _bloc,
           builder: (context, state) {
+            message(
+              context: context,
+              message: state.message,
+              isError: state.error,
+              bloc: _bloc,
+            );
             _bloc.state.helpRequests.checkPaginationInitialExtent(
               addEvent: () {
                 _fetchFilteredData();
@@ -229,66 +235,79 @@ class _HelpRequestsPageState extends State<HelpRequestsPage> {
                             ],
                           ),
                         ),
-                        ...state.helpRequests.items.map(
-                          (helpOffer) => GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(
-                                PageName.detailsPage,
-                                arguments: DetailsPageArguments(
-                                  id: helpOffer.id,
-                                  isOffer: false,
-                                  helpType: helpOffer.helpType,
-                                ),
-                              );
-                            },
-                            child: CustomContainer(
-                              widget: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  KeyTitleValueRow(
-                                    keyTitle: "نوع الطلب",
-                                    value: homeState.helpTypes
-                                        .firstWhere(
-                                          (b) => b.id == helpOffer.helpType,
-                                        )
-                                        .name,
-                                  ),
-                                  KeyTitleValueRow(
-                                    keyTitle: "المحافظة",
-                                    value: homeState.governorates
-                                        .firstWhere(
-                                            (b) => b.id == helpOffer.cityId)
-                                        .name,
-                                  ),
-                                  KeyTitleValueRow(
-                                    keyTitle: "المنقطة",
-                                    value: homeState.governorates
-                                        .firstWhere(
-                                            (b) => b.id == helpOffer.cityId)
-                                        .cities
-                                        .firstWhere(
-                                            (b) => b.id == helpOffer.areaId)
-                                        .name,
-                                  ),
-                                  KeyTitleValueRow(
-                                    keyTitle: "التاريخ",
-                                    value:
-                                        "${helpOffer.createdAt.substring(0, 10)} - ${helpOffer.createdAt.substring(11, 16)}",
-                                  ),
-                                  Text(
-                                    "*اضغط من أجل رؤية المزيد*",
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                      fontWeight: FontWeight.bold,
+                        if (homeState.helpTypes.isNotEmpty &&
+                            homeState.governorates.isNotEmpty)
+                          ...state.helpRequests.items
+                              .map(
+                                (helpRequest) => GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed(
+                                      PageName.detailsPage,
+                                      arguments: DetailsPageArguments(
+                                        id: helpRequest.id,
+                                        isOffer: false,
+                                        helpType: helpRequest.helpType,
+                                      ),
+                                    );
+                                  },
+                                  child: CustomContainer(
+                                    widget: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        KeyTitleValueRow(
+                                          keyTitle: "نوع الطلب",
+                                          value: homeState.helpTypes
+                                              .firstWhere(
+                                                (b) =>
+                                                    b.id ==
+                                                    helpRequest.helpType,
+                                              )
+                                              .name,
+                                        ),
+                                        KeyTitleValueRow(
+                                          keyTitle: "المحافظة",
+                                          value: homeState.governorates
+                                              .firstWhere((b) =>
+                                                  b.id == helpRequest.cityId)
+                                              .name,
+                                        ),
+                                        if (helpRequest.areaId != null)
+                                          KeyTitleValueRow(
+                                            keyTitle: "المنطقة",
+                                            value: homeState.governorates
+                                                .firstWhere((b) =>
+                                                    b.id == helpRequest.cityId)
+                                                .cities
+                                                .firstWhere((b) =>
+                                                    b.id == helpRequest.areaId)
+                                                .name,
+                                          ),
+                                        if (helpRequest.areaId == null)
+                                          const KeyTitleValueRow(
+                                            keyTitle: "المنطقة",
+                                            value: 'غير محددة',
+                                          ),
+                                        KeyTitleValueRow(
+                                          keyTitle: "التاريخ",
+                                          value:
+                                              "${helpRequest.createdAt.substring(0, 10)} - ${helpRequest.createdAt.substring(11, 16)}",
+                                        ),
+                                        Text(
+                                          "*اضغط من أجل رؤية المزيد*",
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                                ),
+                              )
+                              .toList(),
                         if (!state.helpRequests.isFinished &&
                             state.helpRequests.items.isNotEmpty)
                           const Loader(),
@@ -304,7 +323,7 @@ class _HelpRequestsPageState extends State<HelpRequestsPage> {
                   if (state.helpRequests.items.isEmpty && !state.isLoading)
                     Padding(
                       padding: EdgeInsets.only(
-                        top: 200.h,
+                        top: 100.h,
                       ),
                       child: const EmptyPage(
                         iconPath: IconsAssets.handsSupportWithLove,

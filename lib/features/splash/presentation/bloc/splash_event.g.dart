@@ -63,6 +63,63 @@ class ClearMessageBuilder
   }
 }
 
+class _$CheckVersion extends CheckVersion {
+  factory _$CheckVersion([void Function(CheckVersionBuilder)? updates]) =>
+      (new CheckVersionBuilder()..update(updates))._build();
+
+  _$CheckVersion._() : super._();
+
+  @override
+  CheckVersion rebuild(void Function(CheckVersionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  CheckVersionBuilder toBuilder() => new CheckVersionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is CheckVersion;
+  }
+
+  @override
+  int get hashCode {
+    return 647287479;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'CheckVersion').toString();
+  }
+}
+
+class CheckVersionBuilder
+    implements Builder<CheckVersion, CheckVersionBuilder> {
+  _$CheckVersion? _$v;
+
+  CheckVersionBuilder();
+
+  @override
+  void replace(CheckVersion other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$CheckVersion;
+  }
+
+  @override
+  void update(void Function(CheckVersionBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  CheckVersion build() => _build();
+
+  _$CheckVersion _build() {
+    final _$result = _$v ?? new _$CheckVersion._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ReInitState extends ReInitState {
   @override
   final Function? onStateReInitialized;

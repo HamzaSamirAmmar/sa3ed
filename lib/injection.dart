@@ -26,6 +26,7 @@ abstract class RegisterModule {
   preferRelativeImports: true,
   asExtension: false,
 )
+
 Future<void> configureDependencies() async {
   await $initGetIt(sl);
 }

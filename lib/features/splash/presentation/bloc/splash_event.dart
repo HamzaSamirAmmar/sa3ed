@@ -9,10 +9,22 @@ abstract class ClearMessage extends SplashEvent
   ClearMessage._();
 
   factory ClearMessage([Function(ClearMessageBuilder b) updates]) =
-      _$ClearMessage;
+  _$ClearMessage;
 
   factory ClearMessage.initial() {
     return ClearMessage((b) => b);
+  }
+}
+
+abstract class CheckVersion extends SplashEvent
+    implements Built<CheckVersion, CheckVersionBuilder> {
+  CheckVersion._();
+
+  factory CheckVersion([Function(CheckVersionBuilder b) updates]) =
+      _$CheckVersion;
+
+  factory CheckVersion.initial() {
+    return CheckVersion((b) => b);
   }
 }
 
