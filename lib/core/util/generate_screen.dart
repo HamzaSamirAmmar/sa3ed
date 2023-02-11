@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sa3ed/features/auth/presentation/pages/login_page.dart';
+import 'package:sa3ed/features/auth/presentation/pages/register_page.dart';
 
 import '../../features/about_us/presentation/pages/about_us_page.dart';
 import '../../features/details/presentation/pages/details_page.dart';
@@ -56,6 +58,22 @@ class GeneratePage {
           );
         }
 
+      /*** loginPage **/
+      case PageName.loginPage:
+        {
+          return MaterialPageRoute(
+            builder: (context) => const LoginPage(),
+          );
+        }
+
+      /*** registerPage **/
+      case PageName.registerPage:
+        {
+          return MaterialPageRoute(
+            builder: (context) => const RegisterPage(),
+          );
+        }
+
       default:
         return _errorRoute();
     }
@@ -83,6 +101,8 @@ class PageName {
   static const String aboutUsPage = "/about-us";
   static const String formPage = "/form";
   static const String detailsPage = "/details";
+  static const String loginPage = "/login";
+  static const String registerPage = "/register";
 }
 
 class DetailsPageArguments {

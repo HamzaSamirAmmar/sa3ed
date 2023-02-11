@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../../domain/use_cases/get_all_governorates_use_case.dart';
 import '../../domain/use_cases/get_all_help_types_use_case.dart';
+import '../../domain/use_cases/logout_use_case.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
@@ -11,6 +12,7 @@ import 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetAllGovernoratesUseCase _getAllGovernoratesUseCase;
   final GetAllHelpTypesUseCase _getAllHelpTypesUseCase;
+  final LogoutUseCase _logoutUseCase;
 
   void clearMessage() {
     add(ClearMessage());
@@ -32,10 +34,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     add(GetAllHelpTypes());
   }
 
+  void addLogoutEvent() {
+    add(Logout());
+  }
+
   @factoryMethod
   HomeBloc(
     this._getAllGovernoratesUseCase,
     this._getAllHelpTypesUseCase,
+    this._logoutUseCase,
   ) : super(HomeState.initial()) {
     on<HomeEvent>(
       (event, emit) async {
@@ -50,6 +57,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           if (event.onStateReInitialized != null) {
             event.onStateReInitialized!();
           }
+        }
+
+        /*** Logout **/
+        if (event is Logout) {
+          final result = await _logoutUseCase(NoParams());
+
+          result.fold(
+            (failure) => emit(
+              HomeState.failure(
+                message: failure.error,
+                currentState: state,
+              ),
+            ),
+            (success) => emit(
+              state.rebuild(
+                (b) => b
+                  ..isLoading = false
+                  ..isUnauthorized = true,
+              ),
+            ),
+          );
         }
 
         /*** GetAllGovernorates **/

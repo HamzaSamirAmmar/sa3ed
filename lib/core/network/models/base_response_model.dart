@@ -7,6 +7,7 @@ import 'package:sa3ed/core/network/models/paginate_response_model.dart';
 import 'package:sa3ed/features/form/data/models/submitted_form_model.dart';
 
 import '../../../features/about_us/data/models/about_us_model.dart';
+import '../../../features/auth/data/models/user_model.dart';
 import '../../../features/helpful_information/data/models/helpful_information_model.dart';
 import '../../../features/splash/data/models/version_model.dart';
 import '../../error/exceptions.dart';
@@ -56,6 +57,11 @@ T? _dataFromJson<T>(Object? data) {
     /*** SubmittedFormModel  ***/
     if (T.toString() == SubmittedFormModel.className) {
       return SubmittedFormModel.fromJson(data) as T;
+    }
+
+    /*** UserModel  ***/
+    if (T.toString() == UserModel.className) {
+      return UserModel.fromJson(data) as T;
     }
 
     /*** HelpModel  ***/

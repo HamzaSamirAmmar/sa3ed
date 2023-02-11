@@ -22,16 +22,12 @@ class HistoryRepositoryImp extends BaseRepositoryImpl
   });
 
   @override
-  Future<Either<Failure, List<Help>>> getHelpHistory() async {
-    final List<String> ids = await _local.getHelpIds();
-    if (ids.isNotEmpty) {
-      return await remoteRequest<List<Help>>(
-        () => _remote.getHelpHistory(ids: ids),
+  Future<Either<Failure, List<Help>>> getHelpHistory() async =>
+      await remoteRequest<List<Help>>(
+        (token) => _remote.getHelpHistory(
+          token: token,
+        ),
       );
-    } else {
-      return const Right([]);
-    }
-  }
 
   @override
   Future<Either<Failure, void>> deleteHelp({
@@ -39,9 +35,10 @@ class HistoryRepositoryImp extends BaseRepositoryImpl
     required bool isOffer,
   }) async =>
       await remoteRequest<void>(
-        () => _remote.deleteHelp(
+        (token) => _remote.deleteHelp(
           id: id,
           isOffer: isOffer,
+          token: token,
         ),
       );
 }

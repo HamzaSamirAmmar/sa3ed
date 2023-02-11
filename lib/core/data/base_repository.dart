@@ -10,7 +10,7 @@ import 'base_local_data_source.dart';
 
 typedef FutureEitherOr<T> = Future<Either<Failure, T>> Function();
 
-typedef RemoteRequestBody<T> = Future<T> Function();
+typedef RemoteRequestBody<T> = Future<T> Function(String token);
 
 typedef LocalRequestBody<T> = Future<T> Function();
 
@@ -40,7 +40,7 @@ class BaseRepositoryImpl implements BaseRepository {
   ) async {
     debugPrint('RemoteRequest\n');
     try {
-      final T t = await body();
+      final T t = await body(baseLocalDataSource.token);
       return Right(t);
     } on HandledException catch (e) {
       return Left(

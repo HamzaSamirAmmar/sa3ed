@@ -16,11 +16,14 @@ abstract class HomeState
 
   BuiltList<HelpType> get helpTypes;
 
+  bool get isUnauthorized;
+
   factory HomeState([Function(HomeStateBuilder b) updates]) = _$HomeState;
 
   factory HomeState.initial() {
     return HomeState(
       (b) => b
+        ..isUnauthorized = false
         ..isLoading = false
         ..message = ''
         ..error = false

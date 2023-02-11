@@ -27,9 +27,10 @@ class FormRepositoryImp extends BaseRepositoryImpl implements FormRepository {
     required bool isOffer,
   }) async =>
       await remoteRequest<SubmittedForm>(
-        () => _remote.submitHelpForm(
+        (token) => _remote.submitHelpForm(
           form: form,
           isOffer: isOffer,
+          token: token,
         ),
       );
 

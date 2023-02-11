@@ -15,9 +15,11 @@ class FormRemoteDataSourceImp extends BaseRemoteDataSourceImpl
   Future<SubmittedFormModel> submitHelpForm({
     required HelpFormModel form,
     required bool isOffer,
+    required String token,
   }) async =>
       await performPostRequest<SubmittedFormModel>(
         endpoint: isOffer ? Endpoints.offerHelp() : Endpoints.help(),
         data: RequestBody.submitHelpForm(form: form),
+        token: token,
       );
 }

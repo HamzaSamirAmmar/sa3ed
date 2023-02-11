@@ -14,9 +14,11 @@ class DetailsRemoteDataSourceImp extends BaseRemoteDataSourceImpl
   Future<HelpModel> getHelp({
     required int id,
     required bool isOffer,
+    required String token,
   }) async =>
       await performGetRequest<HelpModel>(
         endpoint:
             isOffer ? Endpoints.offerHelp(id: id) : Endpoints.help(id: id),
+        token: token,
       );
 }

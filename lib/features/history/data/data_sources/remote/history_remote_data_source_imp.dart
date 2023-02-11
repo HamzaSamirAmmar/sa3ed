@@ -12,19 +12,22 @@ class HistoryRemoteDataSourceImp extends BaseRemoteDataSourceImpl
 
   @override
   Future<List<HelpModel>> getHelpHistory({
-    required List<String> ids,
+    required String token,
   }) async =>
       await performGetListRequest<HelpModel>(
-          endpoint: Endpoints.helpHistory,
-          queryParameters: QueryParams.helpHistory(ids: ids));
+        endpoint: Endpoints.helpHistory,
+        token: token,
+      );
 
   @override
   Future<void> deleteHelp({
     required int id,
     required bool isOffer,
+    required String token,
   }) async =>
       await performDeleteRequest<void>(
         endpoint:
             isOffer ? Endpoints.offerHelp(id: id) : Endpoints.help(id: id),
+        token: token,
       );
 }

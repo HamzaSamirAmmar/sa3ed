@@ -80,6 +80,12 @@ class _FormPageState extends State<FormPage> {
           return BlocBuilder<FormBloc, bloc_form_state.FormState>(
             bloc: _bloc,
             builder: (context, blocFromState) {
+              message(
+                context: context,
+                message: blocFromState.message,
+                isError: blocFromState.error,
+                bloc: _bloc,
+              );
               return GestureDetector(
                 onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
                 child: Scaffold(

@@ -5,5 +5,5 @@ import '../../../../core/error/failures.dart';
 import '../entities/helpful_information.dart';
 
 abstract class HelpfulInformationRepository extends BaseRepository {
-  Future<Either<Failure, HelpfulInformation>> getHelpfulInformation();
+  Future<Either<Failure, List<HelpfulInformation>>> getHelpfulInformation();
 }

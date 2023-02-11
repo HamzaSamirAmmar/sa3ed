@@ -63,6 +63,62 @@ class ClearMessageBuilder
   }
 }
 
+class _$CheckAuth extends CheckAuth {
+  factory _$CheckAuth([void Function(CheckAuthBuilder)? updates]) =>
+      (new CheckAuthBuilder()..update(updates))._build();
+
+  _$CheckAuth._() : super._();
+
+  @override
+  CheckAuth rebuild(void Function(CheckAuthBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  CheckAuthBuilder toBuilder() => new CheckAuthBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is CheckAuth;
+  }
+
+  @override
+  int get hashCode {
+    return 995571189;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'CheckAuth').toString();
+  }
+}
+
+class CheckAuthBuilder implements Builder<CheckAuth, CheckAuthBuilder> {
+  _$CheckAuth? _$v;
+
+  CheckAuthBuilder();
+
+  @override
+  void replace(CheckAuth other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$CheckAuth;
+  }
+
+  @override
+  void update(void Function(CheckAuthBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  CheckAuth build() => _build();
+
+  _$CheckAuth _build() {
+    final _$result = _$v ?? new _$CheckAuth._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$CheckVersion extends CheckVersion {
   factory _$CheckVersion([void Function(CheckVersionBuilder)? updates]) =>
       (new CheckVersionBuilder()..update(updates))._build();

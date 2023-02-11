@@ -5,5 +5,6 @@ abstract class DetailsRemoteDataSource extends BaseRemoteDataSource {
   Future<HelpModel> getHelp({
     required int id,
     required bool isOffer,
+    required String token,
   });
 }

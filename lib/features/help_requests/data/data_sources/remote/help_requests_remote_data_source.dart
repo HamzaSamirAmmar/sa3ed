@@ -8,5 +8,6 @@ abstract class HelpRequestsRemoteDataSource extends BaseRemoteDataSource {
     required int? governorateId,
     required int? cityId,
     required int? helpTypeId,
+    required String token,
   });
 }

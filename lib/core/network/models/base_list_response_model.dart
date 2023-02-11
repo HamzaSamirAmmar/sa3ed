@@ -3,6 +3,7 @@ library base_list_response_model;
 import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../features/helpful_information/data/models/helpful_information_model.dart';
 import '../../../features/home/data/models/city_model.dart';
 import '../../../features/home/data/models/governorate_model.dart';
 import '../../../features/home/data/models/help_type_model.dart';
@@ -53,6 +54,11 @@ class _Converter<T> implements JsonConverter<T, Object> {
       /*** GovernorateModel ***/
       if (T.toString() == GovernorateModel.className) {
         return GovernorateModel.fromJson(json) as T;
+      }
+
+      /*** HelpfulInformationModel ***/
+      if (T.toString() == HelpfulInformationModel.className) {
+        return HelpfulInformationModel.fromJson(json) as T;
       }
 
       /*** HelpTypeModel ***/

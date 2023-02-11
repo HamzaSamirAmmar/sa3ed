@@ -8,7 +8,7 @@ part of 'helpful_information_state.dart';
 
 class _$HelpfulInformationState extends HelpfulInformationState {
   @override
-  final HelpfulInformation? info;
+  final BuiltList<HelpfulInformation> info;
   @override
   final bool isLoading;
   @override
@@ -21,11 +21,13 @@ class _$HelpfulInformationState extends HelpfulInformationState {
       (new HelpfulInformationStateBuilder()..update(updates))._build();
 
   _$HelpfulInformationState._(
-      {this.info,
+      {required this.info,
       required this.isLoading,
       required this.error,
       required this.message})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        info, r'HelpfulInformationState', 'info');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'HelpfulInformationState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(
@@ -80,9 +82,10 @@ class HelpfulInformationStateBuilder
         Builder<HelpfulInformationState, HelpfulInformationStateBuilder> {
   _$HelpfulInformationState? _$v;
 
-  HelpfulInformation? _info;
-  HelpfulInformation? get info => _$this._info;
-  set info(HelpfulInformation? info) => _$this._info = info;
+  ListBuilder<HelpfulInformation>? _info;
+  ListBuilder<HelpfulInformation> get info =>
+      _$this._info ??= new ListBuilder<HelpfulInformation>();
+  set info(ListBuilder<HelpfulInformation>? info) => _$this._info = info;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -101,7 +104,7 @@ class HelpfulInformationStateBuilder
   HelpfulInformationStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _info = $v.info;
+      _info = $v.info.toBuilder();
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -125,15 +128,28 @@ class HelpfulInformationStateBuilder
   HelpfulInformationState build() => _build();
 
   _$HelpfulInformationState _build() {
-    final _$result = _$v ??
-        new _$HelpfulInformationState._(
-            info: info,
-            isLoading: BuiltValueNullFieldError.checkNotNull(
-                isLoading, r'HelpfulInformationState', 'isLoading'),
-            error: BuiltValueNullFieldError.checkNotNull(
-                error, r'HelpfulInformationState', 'error'),
-            message: BuiltValueNullFieldError.checkNotNull(
-                message, r'HelpfulInformationState', 'message'));
+    _$HelpfulInformationState _$result;
+    try {
+      _$result = _$v ??
+          new _$HelpfulInformationState._(
+              info: info.build(),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, r'HelpfulInformationState', 'isLoading'),
+              error: BuiltValueNullFieldError.checkNotNull(
+                  error, r'HelpfulInformationState', 'error'),
+              message: BuiltValueNullFieldError.checkNotNull(
+                  message, r'HelpfulInformationState', 'message'));
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'info';
+        info.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'HelpfulInformationState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

@@ -12,6 +12,8 @@ class _$SplashState extends SplashState {
   @override
   final String? baseUrl;
   @override
+  final bool isAuth;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -24,10 +26,12 @@ class _$SplashState extends SplashState {
   _$SplashState._(
       {this.apkUrl,
       this.baseUrl,
+      required this.isAuth,
       required this.isLoading,
       required this.error,
       required this.message})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(isAuth, r'SplashState', 'isAuth');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, r'SplashState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, r'SplashState', 'error');
@@ -47,6 +51,7 @@ class _$SplashState extends SplashState {
     return other is SplashState &&
         apkUrl == other.apkUrl &&
         baseUrl == other.baseUrl &&
+        isAuth == other.isAuth &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -57,6 +62,7 @@ class _$SplashState extends SplashState {
     var _$hash = 0;
     _$hash = $jc(_$hash, apkUrl.hashCode);
     _$hash = $jc(_$hash, baseUrl.hashCode);
+    _$hash = $jc(_$hash, isAuth.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -69,6 +75,7 @@ class _$SplashState extends SplashState {
     return (newBuiltValueToStringHelper(r'SplashState')
           ..add('apkUrl', apkUrl)
           ..add('baseUrl', baseUrl)
+          ..add('isAuth', isAuth)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -86,6 +93,10 @@ class SplashStateBuilder implements Builder<SplashState, SplashStateBuilder> {
   String? _baseUrl;
   String? get baseUrl => _$this._baseUrl;
   set baseUrl(String? baseUrl) => _$this._baseUrl = baseUrl;
+
+  bool? _isAuth;
+  bool? get isAuth => _$this._isAuth;
+  set isAuth(bool? isAuth) => _$this._isAuth = isAuth;
 
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
@@ -106,6 +117,7 @@ class SplashStateBuilder implements Builder<SplashState, SplashStateBuilder> {
     if ($v != null) {
       _apkUrl = $v.apkUrl;
       _baseUrl = $v.baseUrl;
+      _isAuth = $v.isAuth;
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -133,6 +145,8 @@ class SplashStateBuilder implements Builder<SplashState, SplashStateBuilder> {
         new _$SplashState._(
             apkUrl: apkUrl,
             baseUrl: baseUrl,
+            isAuth: BuiltValueNullFieldError.checkNotNull(
+                isAuth, r'SplashState', 'isAuth'),
             isLoading: BuiltValueNullFieldError.checkNotNull(
                 isLoading, r'SplashState', 'isLoading'),
             error: BuiltValueNullFieldError.checkNotNull(

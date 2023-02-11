@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sa3ed/features/help_requests/presentation/bloc/help_requests_bloc.dart';
-import 'package:sa3ed/features/help_requests/presentation/bloc/help_requests_state.dart';
 
 import '../../../../core/util/constants.dart';
 import '../../../../core/util/generate_screen.dart';
@@ -19,6 +17,8 @@ import '../../../home/domain/entities/governorate.dart';
 import '../../../home/domain/entities/help_type.dart';
 import '../../../home/presentation/bloc/home_bloc.dart';
 import '../../../home/presentation/bloc/home_state.dart';
+import '../bloc/help_requests_bloc.dart';
+import '../bloc/help_requests_state.dart';
 
 class HelpRequestsPage extends StatefulWidget {
   const HelpRequestsPage({Key? key}) : super(key: key);

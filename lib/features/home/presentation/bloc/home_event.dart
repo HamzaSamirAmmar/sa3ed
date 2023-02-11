@@ -9,10 +9,22 @@ abstract class ClearMessage extends HomeEvent
   ClearMessage._();
 
   factory ClearMessage([Function(ClearMessageBuilder b) updates]) =
-      _$ClearMessage;
+  _$ClearMessage;
 
   factory ClearMessage.initial() {
     return ClearMessage((b) => b);
+  }
+}
+
+abstract class Logout extends HomeEvent
+    implements Built<Logout, LogoutBuilder> {
+  Logout._();
+
+  factory Logout([Function(LogoutBuilder b) updates]) =
+      _$Logout;
+
+  factory Logout.initial() {
+    return Logout((b) => b);
   }
 }
 

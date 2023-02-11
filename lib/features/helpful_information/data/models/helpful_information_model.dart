@@ -8,7 +8,14 @@ part 'helpful_information_model.g.dart';
 class HelpfulInformationModel extends HelpfulInformation {
   static const String className = "HelpfulInformationModel";
 
-  const HelpfulInformationModel({required super.html});
+  const HelpfulInformationModel({
+    required super.id,
+    required super.description,
+    required super.governorateId,
+    required super.infoType,
+    required super.locationDetails,
+    required super.name,
+  });
 
   factory HelpfulInformationModel.fromJson(Map<String, dynamic> json) =>
       _$HelpfulInformationModelFromJson(json);

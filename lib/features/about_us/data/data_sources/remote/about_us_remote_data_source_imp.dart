@@ -11,8 +11,11 @@ class AboutUsRemoteDataSourceImp extends BaseRemoteDataSourceImpl
   AboutUsRemoteDataSourceImp({required super.dio});
 
   @override
-  Future<AboutUsModel> getAboutUs() async =>
+  Future<AboutUsModel> getAboutUs({
+    required String token,
+  }) async =>
       await performGetRequest<AboutUsModel>(
         endpoint: Endpoints.aboutUs,
+        token: token,
       );
 }

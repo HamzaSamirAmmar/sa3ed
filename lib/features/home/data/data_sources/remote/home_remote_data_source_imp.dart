@@ -12,14 +12,20 @@ class HomeRemoteDataSourceImp extends BaseRemoteDataSourceImpl
   HomeRemoteDataSourceImp({required super.dio});
 
   @override
-  Future<List<GovernorateModel>> getAllGovernorates() async =>
+  Future<List<GovernorateModel>> getAllGovernorates({
+    required String token,
+  }) async =>
       await performGetListRequest<GovernorateModel>(
         endpoint: Endpoints.governorates,
+        token: token,
       );
 
   @override
-  Future<List<HelpTypeModel>> getAllHelpTypes() async =>
+  Future<List<HelpTypeModel>> getAllHelpTypes({
+    required String token,
+  }) async =>
       await performGetListRequest<HelpTypeModel>(
         endpoint: Endpoints.helpTypes,
+        token: token,
       );
 }

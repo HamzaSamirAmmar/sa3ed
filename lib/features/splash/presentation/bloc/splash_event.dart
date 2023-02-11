@@ -16,6 +16,18 @@ abstract class ClearMessage extends SplashEvent
   }
 }
 
+abstract class CheckAuth extends SplashEvent
+    implements Built<CheckAuth, CheckAuthBuilder> {
+  CheckAuth._();
+
+  factory CheckAuth([Function(CheckAuthBuilder b) updates]) =
+  _$CheckAuth;
+
+  factory CheckAuth.initial() {
+    return CheckAuth((b) => b);
+  }
+}
+
 abstract class CheckVersion extends SplashEvent
     implements Built<CheckVersion, CheckVersionBuilder> {
   CheckVersion._();

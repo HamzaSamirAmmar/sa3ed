@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sa3ed/core/usecases/usecase.dart';
 
+import '../../../../core/usecases/usecase.dart';
 import '../../domain/use_cases/get_helpful_information_use_case.dart';
 import 'helpful_information_event.dart';
 import 'helpful_information_state.dart';
@@ -65,7 +65,7 @@ class HelpfulInformationBloc
               state.rebuild(
                 (b) => b
                   ..isLoading = false
-                  ..info = info,
+                  ..info.replace(info),
               ),
             ),
           );

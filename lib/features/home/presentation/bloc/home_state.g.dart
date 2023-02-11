@@ -12,6 +12,8 @@ class _$HomeState extends HomeState {
   @override
   final BuiltList<HelpType> helpTypes;
   @override
+  final bool isUnauthorized;
+  @override
   final bool isLoading;
   @override
   final bool error;
@@ -24,6 +26,7 @@ class _$HomeState extends HomeState {
   _$HomeState._(
       {required this.governorates,
       required this.helpTypes,
+      required this.isUnauthorized,
       required this.isLoading,
       required this.error,
       required this.message})
@@ -31,6 +34,8 @@ class _$HomeState extends HomeState {
     BuiltValueNullFieldError.checkNotNull(
         governorates, r'HomeState', 'governorates');
     BuiltValueNullFieldError.checkNotNull(helpTypes, r'HomeState', 'helpTypes');
+    BuiltValueNullFieldError.checkNotNull(
+        isUnauthorized, r'HomeState', 'isUnauthorized');
     BuiltValueNullFieldError.checkNotNull(isLoading, r'HomeState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, r'HomeState', 'error');
     BuiltValueNullFieldError.checkNotNull(message, r'HomeState', 'message');
@@ -49,6 +54,7 @@ class _$HomeState extends HomeState {
     return other is HomeState &&
         governorates == other.governorates &&
         helpTypes == other.helpTypes &&
+        isUnauthorized == other.isUnauthorized &&
         isLoading == other.isLoading &&
         error == other.error &&
         message == other.message;
@@ -59,6 +65,7 @@ class _$HomeState extends HomeState {
     var _$hash = 0;
     _$hash = $jc(_$hash, governorates.hashCode);
     _$hash = $jc(_$hash, helpTypes.hashCode);
+    _$hash = $jc(_$hash, isUnauthorized.hashCode);
     _$hash = $jc(_$hash, isLoading.hashCode);
     _$hash = $jc(_$hash, error.hashCode);
     _$hash = $jc(_$hash, message.hashCode);
@@ -71,6 +78,7 @@ class _$HomeState extends HomeState {
     return (newBuiltValueToStringHelper(r'HomeState')
           ..add('governorates', governorates)
           ..add('helpTypes', helpTypes)
+          ..add('isUnauthorized', isUnauthorized)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('message', message))
@@ -93,6 +101,11 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   set helpTypes(ListBuilder<HelpType>? helpTypes) =>
       _$this._helpTypes = helpTypes;
 
+  bool? _isUnauthorized;
+  bool? get isUnauthorized => _$this._isUnauthorized;
+  set isUnauthorized(bool? isUnauthorized) =>
+      _$this._isUnauthorized = isUnauthorized;
+
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
   set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
@@ -112,6 +125,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
     if ($v != null) {
       _governorates = $v.governorates.toBuilder();
       _helpTypes = $v.helpTypes.toBuilder();
+      _isUnauthorized = $v.isUnauthorized;
       _isLoading = $v.isLoading;
       _error = $v.error;
       _message = $v.message;
@@ -141,6 +155,8 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
           new _$HomeState._(
               governorates: governorates.build(),
               helpTypes: helpTypes.build(),
+              isUnauthorized: BuiltValueNullFieldError.checkNotNull(
+                  isUnauthorized, r'HomeState', 'isUnauthorized'),
               isLoading: BuiltValueNullFieldError.checkNotNull(
                   isLoading, r'HomeState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(

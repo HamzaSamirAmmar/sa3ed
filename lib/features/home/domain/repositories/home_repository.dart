@@ -9,4 +9,6 @@ abstract class HomeRepository extends BaseRepository {
   Future<Either<Failure, List<Governorate>>> getAllGovernorates();
 
   Future<Either<Failure, List<HelpType>>> getAllHelpTypes();
+
+  Future<Either<Failure, void>> logout();
 }

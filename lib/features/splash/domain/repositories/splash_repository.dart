@@ -6,4 +6,6 @@ import '../entities/version.dart';
 
 abstract class SplashRepository extends BaseRepository {
   Future<Either<Failure, Version>> checkVersion();
+
+  Future<Either<Failure, bool>> checkAuth();
 }

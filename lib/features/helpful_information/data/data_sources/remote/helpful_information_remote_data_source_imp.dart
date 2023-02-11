@@ -11,8 +11,11 @@ class HelpfulInformationRemoteDataSourceImp extends BaseRemoteDataSourceImpl
   HelpfulInformationRemoteDataSourceImp({required super.dio});
 
   @override
-  Future<HelpfulInformationModel> getHelpfulInformation() async =>
-      await performGetRequest<HelpfulInformationModel>(
+  Future<List<HelpfulInformationModel>> getHelpfulInformation({
+    required String token,
+  }) async =>
+      await performGetListRequest<HelpfulInformationModel>(
         endpoint: Endpoints.helpfulInformation,
+        token: token,
       );
 }

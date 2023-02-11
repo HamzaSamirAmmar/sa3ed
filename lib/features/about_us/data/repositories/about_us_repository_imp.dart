@@ -24,6 +24,6 @@ class AboutUsRepositoryImp extends BaseRepositoryImpl
   @override
   Future<Either<Failure, AboutUs>> getAboutUs() async =>
       await remoteRequest<AboutUs>(
-        () => _remote.getAboutUs(),
+        (token) => _remote.getAboutUs(token: token),
       );
 }

@@ -18,6 +18,7 @@ class HelpOffersRemoteDataSourceImp extends BaseRemoteDataSourceImpl
     required int? governorateId,
     required int? cityId,
     required int? helpTypeId,
+    required String token,
   }) async =>
       await performGetRequest<PaginateResponseModel<SummaryHelpModel>>(
         endpoint: Endpoints.offerHelp(),
@@ -27,5 +28,6 @@ class HelpOffersRemoteDataSourceImp extends BaseRemoteDataSourceImpl
           cityId: cityId,
           helpTypeId: helpTypeId,
         ),
+        token: token,
       );
 }

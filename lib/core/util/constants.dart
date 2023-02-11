@@ -4,18 +4,23 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sa3ed/features/form/data/models/help_form_model.dart';
+
+import '../../features/form/data/models/help_form_model.dart';
 
 class Endpoints {
   static const String baseUrl = "http://helpus.eu-4.evennode.com";
 
   static const String governorates = "/api/location/all";
 
+  static const String login = "/api/auth/login";
+
+  static const String register = "/api/auth/signup";
+
   static const String helpTypes = "/api/helpinfo/types";
 
-  static const String helpfulInformation = "/api/info";
+  static const String helpfulInformation = "/api/importantinfo";
 
-  static const String helpHistory = "/api/helpinfo/helps/";
+  static const String helpHistory = "/api/helpinfo/helps/me";
 
   static const String version = "/api/settings";
 
@@ -29,6 +34,9 @@ class Endpoints {
 
 class SharedPreferencesKeys {
   static const postIds = "post_ids";
+  static const token = "token";
+  static const username = "username";
+  static const userid = "userid";
 }
 
 class IconsAssets {
@@ -77,6 +85,19 @@ class RequestBody {
   }) {
     return json.encode(form.toJson());
   }
+
+  /// ** sendAuthData ** ///
+  static String sendAuthData({
+    required String name,
+    required String password,
+  }) {
+    return json.encode(
+      {
+        "username": name,
+        "password": password,
+      },
+    );
+  }
 }
 
 class GetOptions {
@@ -90,7 +111,7 @@ class GetOptions {
       options.headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        'x-auth-token': token,
         'Accept-Language': language,
       };
     } else {
@@ -105,7 +126,8 @@ class GetOptions {
 }
 
 class ErrorMessage {
-  static const String somethingWentWrong = "خطأ غير متوقع، يرجى التحقق من إتصالك بالانترنت";
+  static const String somethingWentWrong =
+      "خطأ غير متوقع، يرجى التحقق من إتصالك بالانترنت";
   static const String error400 = "الطلب المرسل غير صحيح";
   static const String error401 = "فشلت عملية المصادقة مع الخادم";
   static const String error403 = "ليس لديك اذن للوصول إلى المورد المطلوب";

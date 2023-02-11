@@ -22,8 +22,10 @@ class HelpfulInformationRepositoryImp extends BaseRepositoryImpl
   });
 
   @override
-  Future<Either<Failure, HelpfulInformation>> getHelpfulInformation() async =>
-      await remoteRequest<HelpfulInformation>(
-        () => _remote.getHelpfulInformation(),
+  Future<Either<Failure, List<HelpfulInformation>>> getHelpfulInformation() async =>
+      await remoteRequest<List<HelpfulInformation>>(
+        (token) => _remote.getHelpfulInformation(
+          token: token,
+        ),
       );
 }

@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sa3ed/features/home/domain/entities/help_type.dart';
 
 import '../../../../core/data/base_repository.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/governorate.dart';
+import '../../domain/entities/help_type.dart';
 import '../../domain/repositories/home_repository.dart';
 import '../data_sources/local/home_local_data_source.dart';
 import '../data_sources/remote/home_remote_data_source.dart';
@@ -24,12 +24,22 @@ class HomeRepositoryImp extends BaseRepositoryImpl implements HomeRepository {
   @override
   Future<Either<Failure, List<Governorate>>> getAllGovernorates() async =>
       await remoteRequest(
-        () => _remote.getAllGovernorates(),
+        (token) => _remote.getAllGovernorates(token: token),
       );
 
   @override
   Future<Either<Failure, List<HelpType>>> getAllHelpTypes() async =>
       await remoteRequest(
-        () => _remote.getAllHelpTypes(),
+        (token) => _remote.getAllHelpTypes(token: token),
       );
+
+  @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      await baseLocalDataSource.logout();
+      return const Right(null);
+    } catch (e) {
+      return const Left(CacheFailure());
+    }
+  }
 }

@@ -8,12 +8,12 @@ import '../repositories/helpful_information_repository.dart';
 
 @lazySingleton
 class GetHelpfulInformationUseCase
-    implements UseCase<HelpfulInformation, NoParams> {
+    implements UseCase<List<HelpfulInformation>, NoParams> {
   final HelpfulInformationRepository _repository;
 
   GetHelpfulInformationUseCase(this._repository);
 
   @override
-  Future<Either<Failure, HelpfulInformation>> call(NoParams params) async =>
+  Future<Either<Failure, List<HelpfulInformation>>> call(NoParams params) async =>
       await _repository.getHelpfulInformation();
 }

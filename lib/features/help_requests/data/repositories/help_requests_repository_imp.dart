@@ -30,12 +30,13 @@ class HelpRequestsRepositoryImp extends BaseRepositoryImpl
     required int? helpTypeId,
   }) async =>
       await remoteRequest<PaginateList<SummaryHelpModel>>(
-        () async {
+        (token) async {
           final paginationModel = await _remote.getHelpRequests(
             page: page,
             governorateId: governorateId,
             cityId: cityId,
             helpTypeId: helpTypeId,
+            token: token,
           );
           return PaginateList<SummaryHelpModel>(
             data: paginationModel.data,

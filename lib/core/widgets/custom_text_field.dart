@@ -12,11 +12,13 @@ class CustomTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final GlobalKey<FormState> formKey;
   final String? Function(String? text) validator;
+  final bool obscureText;
 
   const CustomTextField({
     Key? key,
     required this.hint,
     required this.formKey,
+    this.obscureText = false,
     this.maxLines = 1,
     this.inputFormatters,
     this.extraPadding = true,
@@ -40,6 +42,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         Text(widget.label),
         SizedBox(height: 10.h),
         TextFormField(
+          obscureText: widget.obscureText,
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w500,

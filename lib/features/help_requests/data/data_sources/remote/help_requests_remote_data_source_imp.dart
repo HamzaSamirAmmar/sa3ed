@@ -17,9 +17,11 @@ class HelpRequestsRemoteDataSourceImp extends BaseRemoteDataSourceImpl
     required int? governorateId,
     required int? cityId,
     required int? helpTypeId,
+    required String token,
   }) async =>
       await performGetRequest<PaginateResponseModel<SummaryHelpModel>>(
         endpoint: Endpoints.help(),
+        token: token,
         queryParameters: QueryParams.paginationParams(
           page: page,
           governorateId: governorateId,

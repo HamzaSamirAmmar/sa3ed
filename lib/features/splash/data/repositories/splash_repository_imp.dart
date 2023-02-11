@@ -24,6 +24,16 @@ class SplashRepositoryImp extends BaseRepositoryImpl
   @override
   Future<Either<Failure, Version>> checkVersion() async =>
       await remoteRequest<Version>(
-        () => _remote.checkVersion(),
+        (_) => _remote.checkVersion(),
       );
+
+  @override
+  Future<Either<Failure, bool>> checkAuth() async {
+    try {
+      final String token = baseLocalDataSource.token;
+      return Right(token.isNotEmpty);
+    } catch (e) {
+      return const Left(CacheFailure());
+    }
+  }
 }

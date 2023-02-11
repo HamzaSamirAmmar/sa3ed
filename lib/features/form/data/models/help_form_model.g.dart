@@ -10,7 +10,7 @@ HelpFormModel _$HelpFormModelFromJson(Map<String, dynamic> json) =>
     HelpFormModel(
       cityId: json['id_city'] as int,
       helpType: json['help_type'] as int,
-      areaId: json['id_area'] as int,
+      areaId: json['id_area'] as int?,
       locationDetails: json['location_details'] as String,
       name: json['name'] as String,
       phone: json['phone'] as String,

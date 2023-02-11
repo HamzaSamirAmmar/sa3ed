@@ -13,11 +13,14 @@ abstract class SplashState
 
   String? get baseUrl;
 
+  bool get isAuth;
+
   factory SplashState([Function(SplashStateBuilder b) updates]) = _$SplashState;
 
   factory SplashState.initial() {
     return SplashState(
       (b) => b
+        ..isAuth = false
         ..apkUrl = null
         ..baseUrl = b.baseUrl
         ..isLoading = false

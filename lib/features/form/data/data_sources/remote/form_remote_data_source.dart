@@ -6,5 +6,6 @@ abstract class FormRemoteDataSource extends BaseRemoteDataSource {
   Future<SubmittedFormModel> submitHelpForm({
     required HelpFormModel form,
     required bool isOffer,
+    required String token,
   });
 }

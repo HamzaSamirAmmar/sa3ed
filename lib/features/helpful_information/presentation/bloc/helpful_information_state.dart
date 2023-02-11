@@ -11,7 +11,7 @@ abstract class HelpfulInformationState
     implements Built<HelpfulInformationState, HelpfulInformationStateBuilder> {
   HelpfulInformationState._();
 
-  HelpfulInformation? get info;
+  BuiltList<HelpfulInformation> get info;
 
   factory HelpfulInformationState(
           [Function(HelpfulInformationStateBuilder b) updates]) =
@@ -22,7 +22,8 @@ abstract class HelpfulInformationState
       (b) => b
         ..isLoading = false
         ..message = ''
-        ..error = false,
+        ..error = false
+        ..info.replace([]),
     );
   }
 
