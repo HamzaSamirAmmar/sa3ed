@@ -23,4 +23,6 @@ class GovernorateModel extends Governorate {
 
   factory GovernorateModel.fromJson(Map<String, dynamic> json) =>
       _$GovernorateModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GovernorateModelToJson(this);
 }

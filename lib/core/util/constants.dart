@@ -36,6 +36,7 @@ class SharedPreferencesKeys {
   static const postIds = "post_ids";
   static const token = "token";
   static const username = "username";
+  static const governorates = "governorates";
   static const userid = "userid";
 }
 
@@ -83,7 +84,18 @@ class RequestBody {
   static String submitHelpForm({
     required HelpFormModel form,
   }) {
-    return json.encode(form.toJson());
+    return json.encode(
+      {
+        'name': form.name,
+        'phone': form.phone,
+        'help_type': form.helpType,
+        'id_city': form.cityId,
+        if (form.areaId != null) 'id_area': form.areaId,
+        'location_details': form.locationDetails,
+        'notice': form.notes,
+        'moveable': form.movable,
+      },
+    );
   }
 
   /// ** sendAuthData ** ///

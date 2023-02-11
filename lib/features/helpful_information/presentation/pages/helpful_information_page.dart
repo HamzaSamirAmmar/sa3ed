@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,6 +10,7 @@ import '../../../../core/widgets/custom_container.dart';
 import '../../../../core/widgets/custom_drop_down_button.dart';
 import '../../../../core/widgets/empty_page.dart';
 import '../../../../core/widgets/loader.dart';
+import '../../../../core/widgets/scroll_back_button.dart';
 import '../../../../injection.dart';
 import '../../../home/domain/entities/governorate.dart';
 import '../../../home/presentation/bloc/home_bloc.dart';
@@ -35,6 +37,10 @@ class _HelpfulInformationPageState extends State<HelpfulInformationPage> {
   Governorate? _governorate;
 
   List<HelpfulInformation> _filteredInfo = [];
+
+  late final ScrollController _scrollController;
+
+  bool _isScrollBackButtonVisible = false;
 
   void _filterData({
     required List<HelpfulInformation> info,
@@ -66,6 +72,31 @@ class _HelpfulInformationPageState extends State<HelpfulInformationPage> {
   @override
   void initState() {
     _bloc.addGetHelpfulInformationEvent();
+    _scrollController = ScrollController()
+      ..addListener(() {
+        if (_scrollController.hasClients) {
+          if (_scrollController.offset == 0) {
+            if (_isScrollBackButtonVisible) {
+              setState(() {
+                _isScrollBackButtonVisible = false;
+              });
+            }
+          } else if (_scrollController.position.userScrollDirection ==
+              ScrollDirection.forward) {
+            if (!_isScrollBackButtonVisible) {
+              setState(() {
+                _isScrollBackButtonVisible = true;
+              });
+            }
+          } else {
+            if (_isScrollBackButtonVisible) {
+              setState(() {
+                _isScrollBackButtonVisible = false;
+              });
+            }
+          }
+        }
+      });
     super.initState();
   }
 
@@ -213,17 +244,18 @@ class _HelpfulInformationPageState extends State<HelpfulInformationPage> {
                                             item.governorateId)
                                         .name,
                                   ),
-                                  KeyTitleValueRow(
-                                    keyTitle: 'العنوان',
-                                    value: item.locationDetails,
-                                  ),
+                                  if (item.locationDetails.isNotEmpty)
+                                    KeyTitleValueRow(
+                                      keyTitle: 'العنوان',
+                                      value: item.locationDetails,
+                                    ),
                                   KeyTitleValueRow(
                                     keyTitle: 'النوع',
                                     value: mapInfoTypeToString(item.infoType),
                                   ),
                                   KeyTitleValueRow(
                                     keyTitle: 'التفاصيل',
-                                    value: item.name,
+                                    value: item.description,
                                   ),
                                 ],
                               ),
@@ -249,17 +281,18 @@ class _HelpfulInformationPageState extends State<HelpfulInformationPage> {
                                             item.governorateId)
                                         .name,
                                   ),
-                                  KeyTitleValueRow(
-                                    keyTitle: 'العنوان',
-                                    value: item.locationDetails,
-                                  ),
+                                  if (item.locationDetails.isNotEmpty)
+                                    KeyTitleValueRow(
+                                      keyTitle: 'العنوان',
+                                      value: item.locationDetails,
+                                    ),
                                   KeyTitleValueRow(
                                     keyTitle: 'النوع',
                                     value: mapInfoTypeToString(item.infoType),
                                   ),
                                   KeyTitleValueRow(
                                     keyTitle: 'التفاصيل',
-                                    value: item.name,
+                                    value: item.description,
                                   ),
                                 ],
                               ),
@@ -267,6 +300,10 @@ class _HelpfulInformationPageState extends State<HelpfulInformationPage> {
                           ),
                       ],
                     ),
+                  ),
+                  ScrollBackButton(
+                    isVisible: _isScrollBackButtonVisible,
+                    controller: _scrollController,
                   ),
                   if (state.isLoading) const Loader(),
                   if (!state.isLoading && state.info.isEmpty)

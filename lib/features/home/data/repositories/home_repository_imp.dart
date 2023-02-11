@@ -22,10 +22,22 @@ class HomeRepositoryImp extends BaseRepositoryImpl implements HomeRepository {
   });
 
   @override
-  Future<Either<Failure, List<Governorate>>> getAllGovernorates() async =>
-      await remoteRequest(
-        (token) => _remote.getAllGovernorates(token: token),
+  Future<Either<Failure, List<Governorate>>> getAllGovernorates() async {
+    final storedGovernorates = await _local.getGovernorates();
+    if (storedGovernorates.isEmpty) {
+      return remoteRequest(
+        (token) async {
+          final governorates = await _remote.getAllGovernorates(token: token);
+          await _local.storeGovernorates(governorates: governorates);
+          return governorates;
+        },
       );
+    } else {
+      return localRequest(
+        () => _local.getGovernorates(),
+      );
+    }
+  }
 
   @override
   Future<Either<Failure, List<HelpType>>> getAllHelpTypes() async =>

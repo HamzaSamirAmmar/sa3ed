@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:sa3ed/features/home/presentation/bloc/home_bloc.dart';
 
+import '../../injection.dart';
 import '../network/models/base_response_model.dart';
 import '../util/constants.dart';
 import 'exceptions.dart';
@@ -30,7 +32,7 @@ Exception statusCodeHandler(Response response) {
     else if (response.statusCode == 401) {
       debugPrint('StatusCodeHandler: the code is ${response.statusCode}\n');
       debugPrint('StatusCodeHandler: throwing UnauthorizedException\n');
-
+      sl<HomeBloc>().addLogoutEvent();
       return UnauthorizedException(
         error: errorMessage ?? ErrorMessage.error401,
       );

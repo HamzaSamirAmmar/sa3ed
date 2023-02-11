@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sa3ed/core/util/constants.dart';
-import 'package:sa3ed/core/widgets/KeyValueRow.dart';
-import 'package:sa3ed/features/form/data/models/help_form_model.dart';
 
+import '../../../../core/util/constants.dart';
+import '../../../../core/widgets/KeyValueRow.dart';
 import '../../../../core/widgets/custom_drop_down_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/loader.dart';
@@ -15,6 +14,7 @@ import '../../../home/domain/entities/governorate.dart';
 import '../../../home/domain/entities/help_type.dart';
 import '../../../home/presentation/bloc/home_bloc.dart';
 import '../../../home/presentation/bloc/home_state.dart';
+import '../../data/models/help_form_model.dart';
 import '../bloc/form_bloc.dart';
 import '../bloc/form_state.dart' as bloc_form_state;
 
@@ -124,7 +124,7 @@ class _FormPageState extends State<FormPage> {
                                     ),
                                     child: Column(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "ملاحظات هامة",
                                           style: TextStyle(
                                             color: Colors.red,
@@ -259,7 +259,7 @@ class _FormPageState extends State<FormPage> {
                                   controller: _notes,
                                   label: "هل لديك أية ملاحظات أخرى؟",
                                   hint:
-                                      "يمكنك هنا وصف المساعدة بشكل أكثر (مثال: عدد الأفراد، الكمية المطلوبة، ...)",
+                                    widget.isHelpRequest?  "يمكنك هنا وصف المساعدة بشكل أكثر (مثال: عدد الأفراد، الكمية المطلوبة، ...)" : "يمكنك هنا وصف المساعدة بشكل أكثر (مثال: حجم المساعدة، الوقت الذي يمكن تأمينه بها، ...)",
                                   maxLines: 5,
                                   validator: (text) {
                                     return null;
