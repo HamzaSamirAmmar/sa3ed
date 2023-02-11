@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sa3ed/core/util/constants.dart';
-import 'package:sa3ed/core/widgets/KeyValueRow.dart';
-import 'package:sa3ed/core/widgets/custom_container.dart';
-import 'package:sa3ed/core/widgets/empty_page.dart';
-import 'package:sa3ed/core/widgets/loader.dart';
-import 'package:sa3ed/features/history/presentation/bloc/history_bloc.dart';
-import 'package:sa3ed/features/home/presentation/bloc/home_bloc.dart';
 
+import '../../../../core/util/constants.dart';
+import '../../../../core/widgets/KeyValueRow.dart';
+import '../../../../core/widgets/custom_container.dart';
+import '../../../../core/widgets/empty_page.dart';
+import '../../../../core/widgets/loader.dart';
 import '../../../../injection.dart';
+import '../../../home/presentation/bloc/home_bloc.dart';
 import '../../../home/presentation/bloc/home_state.dart';
+import '../bloc/history_bloc.dart';
 import '../bloc/history_state.dart';
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({Key? key}) : super(key: key);
+  final HistoryBloc bloc;
+
+  const HistoryPage({Key? key, required this.bloc}) : super(key: key);
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  final _bloc = sl<HistoryBloc>();
-
   final _homeBloc = sl<HomeBloc>();
 
   @override
   void initState() {
-    _bloc.addGetHelpHistoryEvent();
+    widget.bloc.addGetHelpHistoryEvent();
     super.initState();
   }
 
@@ -38,13 +37,13 @@ class _HistoryPageState extends State<HistoryPage> {
       bloc: _homeBloc,
       builder: (context, homeState) {
         return BlocBuilder<HistoryBloc, HistoryState>(
-          bloc: _bloc,
+          bloc: widget.bloc,
           builder: (context, state) {
             message(
               context: context,
               message: state.message,
               isError: state.error,
-              bloc: _bloc,
+              bloc: widget.bloc,
             );
             return Scaffold(
               backgroundColor: Theme.of(context).colorScheme.background,
@@ -62,7 +61,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                   KeyTitleValueRow(
                                     keyTitle: "النوع",
                                     value: help.isOffer
-                                        ? "عرض مساعدة"
+                                        ? "عرض تبرع"
                                         : "طلب مساعدة",
                                   ),
                                   KeyTitleValueRow(
@@ -77,20 +76,20 @@ class _HistoryPageState extends State<HistoryPage> {
                                   KeyTitleValueRow(
                                     keyTitle: "المحافظة",
                                     value: homeState.governorates
-                                        .firstWhere(
-                                            (b) => b.id == help.cityId)
+                                        .firstWhere((b) => b.id == help.cityId)
                                         .name,
                                   ),
-                                  KeyTitleValueRow(
-                                    keyTitle: "المنقطة",
-                                    value: homeState.governorates
-                                        .firstWhere(
-                                            (b) => b.id == help.cityId)
-                                        .cities
-                                        .firstWhere(
-                                            (b) => b.id == help.areaId)
-                                        .name,
-                                  ),
+                                  if (help.areaId != null)
+                                    KeyTitleValueRow(
+                                      keyTitle: "المنطقة",
+                                      value: homeState.governorates
+                                          .firstWhere(
+                                              (b) => b.id == help.cityId)
+                                          .cities
+                                          .firstWhere(
+                                              (b) => b.id == help.areaId)
+                                          .name,
+                                    ),
                                   KeyTitleValueRow(
                                     keyTitle: "العنوان",
                                     value: help.locationDetails,
@@ -119,8 +118,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                       backgroundColor:
                                           Colors.redAccent.withOpacity(0.9),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25),
+                                        borderRadius: BorderRadius.circular(25),
                                       ),
                                     ),
                                     onPressed: () {
@@ -144,7 +142,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                             ),
                                             TextButton(
                                               onPressed: () {
-                                                _bloc.addDeleteHelpEvent(
+                                                widget.bloc.addDeleteHelpEvent(
                                                   id: help.id,
                                                   isOffer: help.isOffer,
                                                 );
@@ -187,7 +185,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     const EmptyPage(
                       iconPath: IconsAssets.handsSupport,
                       description:
-                          "لا يوجد لديك عروض أو طلبات للمساعدة حالياً، في حال كان لديك أية عروض أو طلبات ستظهر لك هنا لكي تتكمن من حذفها في حال تمت تلبيتها",
+                          "لا يوجد لديك عروض تبرع أو طلبات للمساعدة حالياً، في حال أردت إضافة عرض أو طلب اضغط على زر الإضافة الموجود أسفل يمين الشاشة، وستظهر لك هنا لكي تتمكن من حذفها في حال تمت تلبيتها",
                     ),
                 ],
               ),

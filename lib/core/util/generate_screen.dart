@@ -43,7 +43,7 @@ class GeneratePage {
         {
           return MaterialPageRoute(
             builder: (context) => FormPage(
-              isHelpRequest: value.arguments as bool,
+              arguments: value.arguments as FromPageArguments,
             ),
           );
         }
@@ -114,5 +114,15 @@ class DetailsPageArguments {
     required this.id,
     required this.isOffer,
     required this.helpType,
+  });
+}
+
+class FromPageArguments {
+  final bool isRequest;
+  final VoidCallback onSuccess;
+
+  FromPageArguments({
+    required this.isRequest,
+    required this.onSuccess,
   });
 }

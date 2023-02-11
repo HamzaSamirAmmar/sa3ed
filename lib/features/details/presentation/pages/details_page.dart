@@ -57,7 +57,7 @@ class _DetailsPageState extends State<DetailsPage> {
               appBar: AppBar(
                 centerTitle: true,
                 title: Text((widget.arguments.isOffer
-                        ? "عرض مساعدة: "
+                        ? "عرض تبرع: "
                         : "طلب مساعدة: ") +
                     homeState.helpTypes
                         .firstWhere((b) => b.id == widget.arguments.helpType)

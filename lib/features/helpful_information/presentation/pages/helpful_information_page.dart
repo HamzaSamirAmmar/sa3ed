@@ -12,6 +12,7 @@ import '../../../../core/widgets/empty_page.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../../../core/widgets/scroll_back_button.dart';
 import '../../../../injection.dart';
+
 import '../../../home/domain/entities/governorate.dart';
 import '../../../home/presentation/bloc/home_bloc.dart';
 import '../../../home/presentation/bloc/home_state.dart';
@@ -119,6 +120,7 @@ class _HelpfulInformationPageState extends State<HelpfulInformationPage> {
               body: Stack(
                 children: [
                   SingleChildScrollView(
+                    controller: _scrollController,
                     child: Column(
                       children: [
                         SizedBox(height: 20.h),

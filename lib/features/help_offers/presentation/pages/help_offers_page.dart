@@ -175,7 +175,7 @@ class _HelpOffersPageState extends State<HelpOffersPage> {
                               ),
                               CustomDropDownButton<HelpType>(
                                 selectedItem: _helpType,
-                                defaultValue: "نوع المساعدة",
+                                defaultValue: "نوع التبرع",
                                 items: homeState.helpTypes.toList(),
                                 onItemSelected: (HelpType type) {
                                   if (type != _helpType) {

@@ -15,4 +15,6 @@ class CityModel extends City {
 
   factory CityModel.fromJson(Map<String, dynamic> json) =>
       _$CityModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CityModelToJson(this);
 }

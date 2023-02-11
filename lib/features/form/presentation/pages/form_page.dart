@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sa3ed/core/util/generate_screen.dart';
 
 import '../../../../core/util/constants.dart';
 import '../../../../core/widgets/KeyValueRow.dart';
@@ -19,11 +20,11 @@ import '../bloc/form_bloc.dart';
 import '../bloc/form_state.dart' as bloc_form_state;
 
 class FormPage extends StatefulWidget {
-  final bool isHelpRequest;
+  final FromPageArguments arguments;
 
   const FormPage({
     Key? key,
-    required this.isHelpRequest,
+    required this.arguments,
   }) : super(key: key);
 
   @override
@@ -63,6 +64,7 @@ class _FormPageState extends State<FormPage> {
         if (state.allSuccess) {
           _bloc.reInitState(
             onStateReInitialized: () {
+              widget.arguments.onSuccess();
               Navigator.of(context).pop();
               message(
                 context: context,
@@ -92,7 +94,7 @@ class _FormPageState extends State<FormPage> {
                   backgroundColor: Theme.of(context).colorScheme.background,
                   appBar: AppBar(
                     title: Text(
-                        widget.isHelpRequest ? "طلب مساعدة" : "عرض مساعدة"),
+                        widget.arguments.isRequest ? "طلب مساعدة" : "عرض تبرع"),
                     centerTitle: true,
                   ),
                   body: Stack(
@@ -133,15 +135,15 @@ class _FormPageState extends State<FormPage> {
                                         SizedBox(height: 10.h),
                                         KeyTitleValueRow(
                                           keyTitle: "-",
-                                          value: widget.isHelpRequest
+                                          value: widget.arguments.isRequest
                                               ? "أنت الآن على وشك إضافة طلب مساعدة، فرّج الله همك."
-                                              : "أنت الآن على وشك إضافة عرض مساعدة، أخلف الله عليك وجزاك الله خيراً.",
+                                              : "أنت الآن على وشك إضافة عرض تبرع، أخلف الله عليك وجزاك الله خيراً.",
                                         ),
                                         KeyTitleValueRow(
                                           keyTitle: "-",
-                                          value: widget.isHelpRequest
+                                          value: widget.arguments.isRequest
                                               ? "أنتم من يساهم بنجاح هذا التطبيق، لذلك نرجوا منك الإلتزام بحذف طلب المساعدة عندما يتم تلبيتها، وذلك من أجل بقاء البيانات محدثة بشكل دائم، ولكي لا تتلقى اتصالات تعرض عليك المساعدة بعد أن تصبح لست بحاجة لها."
-                                              : "أنتم من يساهم بنجاح هذا التطبيق، لذلك نرجوا منك الإلتزام بحذف عرض المساعدة عندما تريد إنهاء تقديم هذه المساعدة، وذلك من أجل بقاء البيانات محدثة بشكل دائم، ولكي لا تتلقى اتصالات أو طلبات بعد أن تكون قد انتيهت من تقديم هذه المساعدة.",
+                                              : "أنتم من يساهم بنجاح هذا التطبيق، لذلك نرجوا منك الإلتزام بحذف عرض التبرع عندما تريد إنهاء تقديمه، وذلك من أجل بقاء البيانات محدثة بشكل دائم، ولكي لا تتلقى اتصالات أو طلبات بعد أن تكون قد انتيهت من تقديم هذا التبرع.",
                                         ),
                                       ],
                                     ),
@@ -150,12 +152,16 @@ class _FormPageState extends State<FormPage> {
                                 SizedBox(height: 10.h),
                                 CustomDropDownButton<HelpType>(
                                   isValid: _isHelpTypeValid,
-                                  label: widget.isHelpRequest
+                                  label: widget.arguments.isRequest
                                       ? "ما هو نوع المساعدة التي تحتاجها؟"
-                                      : "ما هو نوع المساعدة التي تستطيع تقديمها؟",
-                                  errorText: "نوع الخدمة مطلوب",
+                                      : "ما هو نوع التبرع الذي تستطيع تقديمه؟",
+                                  errorText: widget.arguments.isRequest
+                                      ? "نوع المساعدة مطلوب"
+                                      : "نوع التبرع مطلوب",
                                   selectedItem: _helpType,
-                                  defaultValue: "الرجاء اختيار نوع المساعدة",
+                                  defaultValue: widget.arguments.isRequest
+                                      ? "الرجاء اختيار نوع المساعدة"
+                                      : "الرجاء اختيار نوع التبرع",
                                   items: homeState.helpTypes.toList(),
                                   onItemSelected: (HelpType type) {
                                     if (!_isHelpTypeValid) {
@@ -240,15 +246,22 @@ class _FormPageState extends State<FormPage> {
                                 CustomTextField(
                                   formKey: _formKey,
                                   controller: _phoneNumber,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                  ],
+                                  // inputFormatters: [
+                                  //   FilteringTextInputFormatter.allow(RegExp(r'(^(?:[+0]9)?\d{10,12}$)')),
+                                  // ],
                                   label: "ما هو رقم التواصل؟",
                                   hint: "أدخل رقماً للتواصل معك",
-                                  textInputType: TextInputType.number,
+                                  textInputType: TextInputType.phone,
                                   validator: (text) {
-                                    if (text == null || text.isEmpty) {
+                                    if (text == null ||
+                                        text.isEmpty ||
+                                        text.replaceAll(" ", "").isEmpty) {
                                       return 'الرجاء إدخال رقم للتواصل';
+                                    } else if (!RegExp(r'(^(?:[+])?\d{10,15}$)')
+                                            .hasMatch(text) &&
+                                        !RegExp(r'(^(?:[+])?[\u0621-\u064A\u0660-\u0669]{10,15}$)')
+                                            .hasMatch(text)) {
+                                      return "الرجاء إدخال رقم صحيح";
                                     } else {
                                       return null;
                                     }
@@ -258,8 +271,9 @@ class _FormPageState extends State<FormPage> {
                                   formKey: _formKey,
                                   controller: _notes,
                                   label: "هل لديك أية ملاحظات أخرى؟",
-                                  hint:
-                                    widget.isHelpRequest?  "يمكنك هنا وصف المساعدة بشكل أكثر (مثال: عدد الأفراد، الكمية المطلوبة، ...)" : "يمكنك هنا وصف المساعدة بشكل أكثر (مثال: حجم المساعدة، الوقت الذي يمكن تأمينه بها، ...)",
+                                  hint: widget.arguments.isRequest
+                                      ? "يمكنك هنا وصف المساعدة بشكل أكثر (مثال: عدد الأفراد، الكمية المطلوبة، ...)"
+                                      : "يمكنك هنا وصف التبرع بشكل أكثر (مثال: حجم التبرع، الوقت الذي يمكن تأمينه بها، ...)",
                                   maxLines: 5,
                                   validator: (text) {
                                     return null;
@@ -311,7 +325,8 @@ class _FormPageState extends State<FormPage> {
                                               movable:
                                                   false, // TODO: check movable
                                             ),
-                                            isOffer: !widget.isHelpRequest,
+                                            isOffer:
+                                                !widget.arguments.isRequest,
                                           );
                                         }
                                       },

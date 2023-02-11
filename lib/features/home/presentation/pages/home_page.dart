@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import '../../../../core/util/generate_screen.dart';
 import '../../../../injection.dart';
 import '../../../help_offers/presentation/pages/help_offers_page.dart';
 import '../../../help_requests/presentation/pages/help_requests_page.dart';
 import '../../../helpful_information/presentation/pages/helpful_information_page.dart';
+import '../../../history/presentation/bloc/history_bloc.dart';
 import '../../../history/presentation/pages/history_page.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
@@ -25,20 +27,22 @@ class _HomePageState extends State<HomePage> {
 
   final _bottomBarKey = GlobalKey<GNavState>();
 
+  final _historyBloc = sl<HistoryBloc>();
 
   @override
   void initState() {
+    _pages = [
+      const HelpRequestsPage(),
+      const HelpOffersPage(),
+      HistoryPage(bloc: _historyBloc),
+      const HelpfulInformationPage(),
+    ];
     _bloc.addGetAllGovernoratesEvent();
     _bloc.addGetAllHelpTypesEvent();
     super.initState();
   }
 
-  final List<Widget> _pages = [
-    const HelpRequestsPage(),
-    const HelpOffersPage(),
-    const HistoryPage(),
-    const HelpfulInformationPage(),
-  ];
+  late final List<Widget> _pages;
 
   int _selectedIndex = 0;
 
@@ -123,15 +127,46 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          floatingActionButton: (_selectedIndex == 1 || _selectedIndex == 0)
-              ? FloatingActionButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      PageName.formPage,
-                      arguments: _selectedIndex == 0,
-                    );
-                  },
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+          floatingActionButton: (_selectedIndex == 2)
+              ? SpeedDial(
+                  overlayColor:
+                      Theme.of(context).colorScheme.shadow.withOpacity(0.1),
                   backgroundColor: Theme.of(context).colorScheme.primary,
+                  children: [
+                    SpeedDialChild(
+                      label: "طلب مساعدة",
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          PageName.formPage,
+                          arguments: FromPageArguments(
+                            isRequest: true,
+                            onSuccess: _historyBloc.addGetHelpHistoryEvent,
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        MdiIcons.handshakeOutline,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    SpeedDialChild(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          PageName.formPage,
+                          arguments: FromPageArguments(
+                            isRequest: false,
+                            onSuccess: _historyBloc.addGetHelpHistoryEvent,
+                          ),
+                        );
+                      },
+                      label: "عرض تبرع",
+                      child: Icon(
+                        MdiIcons.handHeartOutline,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
                   child: Icon(
                     MdiIcons.plus,
                     color: Theme.of(context).colorScheme.secondary,
@@ -170,7 +205,7 @@ class _HomePageState extends State<HomePage> {
               ),
               GButton(
                 icon: MdiIcons.handHeartOutline,
-                text: 'عروض المساعدة',
+                text: 'عروض التبرع',
               ),
               GButton(
                 icon: MdiIcons.history,
