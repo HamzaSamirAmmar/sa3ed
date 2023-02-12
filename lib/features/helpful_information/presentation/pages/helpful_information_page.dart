@@ -5,14 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/util/constants.dart';
 import '../../../../core/util/enums.dart';
-import '../../../../core/widgets/KeyValueRow.dart';
 import '../../../../core/widgets/custom_container.dart';
 import '../../../../core/widgets/custom_drop_down_button.dart';
 import '../../../../core/widgets/empty_page.dart';
+import '../../../../core/widgets/key_value_row.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../../../core/widgets/scroll_back_button.dart';
 import '../../../../injection.dart';
-
 import '../../../home/domain/entities/governorate.dart';
 import '../../../home/presentation/bloc/home_bloc.dart';
 import '../../../home/presentation/bloc/home_state.dart';

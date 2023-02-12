@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sa3ed/core/util/constants.dart';
 
+import '../../../../core/util/constants.dart';
 import '../../../../core/util/generate_screen.dart';
-import '../../../../core/widgets/KeyValueRow.dart';
+import '../../../../core/widgets/key_value_row.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../../../injection.dart';
 import '../../../home/presentation/bloc/home_bloc.dart';
@@ -93,18 +93,18 @@ class _DetailsPageState extends State<DetailsPage> {
                                           (b) => b.id == state.help!.cityId)
                                       .name,
                                 ),
-                                if(state.help!.areaId != null)
-                                KeyTitleValueRow(
-                                  keyTitle: "- المنطقة",
-                                  value: homeState.governorates
-                                      .firstWhere(
-                                          (b) => b.id == state.help!.cityId)
-                                      .cities
-                                      .firstWhere(
-                                          (b) => b.id == state.help!.areaId)
-                                      .name,
-                                ),
-                                if(state.help!.areaId == null)
+                                if (state.help!.areaId != null)
+                                  KeyTitleValueRow(
+                                    keyTitle: "- المنطقة",
+                                    value: homeState.governorates
+                                        .firstWhere(
+                                            (b) => b.id == state.help!.cityId)
+                                        .cities
+                                        .firstWhere(
+                                            (b) => b.id == state.help!.areaId)
+                                        .name,
+                                  ),
+                                if (state.help!.areaId == null)
                                   const KeyTitleValueRow(
                                     keyTitle: "- المنطقة",
                                     value: "غير محددة",

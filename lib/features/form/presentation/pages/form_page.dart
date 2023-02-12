@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sa3ed/core/util/generate_screen.dart';
 
 import '../../../../core/util/constants.dart';
-import '../../../../core/widgets/KeyValueRow.dart';
 import '../../../../core/widgets/custom_drop_down_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
+import '../../../../core/widgets/key_value_row.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../../../injection.dart';
 import '../../../home/domain/entities/city.dart';

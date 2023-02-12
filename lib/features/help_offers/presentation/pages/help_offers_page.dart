@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/util/constants.dart';
 import '../../../../core/util/generate_screen.dart';
-import '../../../../core/widgets/KeyValueRow.dart';
 import '../../../../core/widgets/custom_container.dart';
 import '../../../../core/widgets/custom_drop_down_button.dart';
 import '../../../../core/widgets/empty_page.dart';
+import '../../../../core/widgets/key_value_row.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../../../core/widgets/scroll_back_button.dart';
 import '../../../../injection.dart';
@@ -234,72 +234,72 @@ class _HelpOffersPageState extends State<HelpOffersPage> {
                             ],
                           ),
                         ),
-                        if(state.helpOffers.items.isNotEmpty)
-                        ...state.helpOffers.items.map(
-                          (helpOffer) => GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(
-                                PageName.detailsPage,
-                                arguments: DetailsPageArguments(
-                                  id: helpOffer.id,
-                                  isOffer: true,
-                                  helpType: helpOffer.helpType,
-                                ),
-                              );
-                            },
-                            child: CustomContainer(
-                              widget: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  KeyTitleValueRow(
-                                    keyTitle: "نوع العرض",
-                                    value: homeState.helpTypes
-                                        .firstWhere(
-                                            (b) => b.id == helpOffer.helpType)
-                                        .name,
+                        if (state.helpOffers.items.isNotEmpty)
+                          ...state.helpOffers.items.map(
+                            (helpOffer) => GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                  PageName.detailsPage,
+                                  arguments: DetailsPageArguments(
+                                    id: helpOffer.id,
+                                    isOffer: true,
+                                    helpType: helpOffer.helpType,
                                   ),
-                                  KeyTitleValueRow(
-                                    keyTitle: "المحافظة",
-                                    value: homeState.governorates
-                                        .firstWhere(
-                                            (b) => b.id == helpOffer.cityId)
-                                        .name,
-                                  ),
-                                  if (helpOffer.areaId != null)
+                                );
+                              },
+                              child: CustomContainer(
+                                widget: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     KeyTitleValueRow(
-                                      keyTitle: "المنطقة",
-                                      value: homeState.governorates
-                                          .firstWhere((b) =>
-                                      b.id == helpOffer.cityId)
-                                          .cities
-                                          .firstWhere((b) =>
-                                      b.id == helpOffer.areaId)
+                                      keyTitle: "نوع العرض",
+                                      value: homeState.helpTypes
+                                          .firstWhere(
+                                              (b) => b.id == helpOffer.helpType)
                                           .name,
                                     ),
-                                  if (helpOffer.areaId == null)
-                                    const KeyTitleValueRow(
-                                      keyTitle: "المنطقة",
-                                      value: 'غير محددة',
+                                    KeyTitleValueRow(
+                                      keyTitle: "المحافظة",
+                                      value: homeState.governorates
+                                          .firstWhere(
+                                              (b) => b.id == helpOffer.cityId)
+                                          .name,
                                     ),
-                                  KeyTitleValueRow(
-                                    keyTitle: "التاريخ",
-                                    value:
-                                        "${helpOffer.createdAt.substring(0, 10)} - ${helpOffer.createdAt.substring(11, 16)}",
-                                  ),
-                                  Text(
-                                    "*اضغط من أجل رؤية المزيد*",
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                      fontWeight: FontWeight.bold,
+                                    if (helpOffer.areaId != null)
+                                      KeyTitleValueRow(
+                                        keyTitle: "المنطقة",
+                                        value: homeState.governorates
+                                            .firstWhere(
+                                                (b) => b.id == helpOffer.cityId)
+                                            .cities
+                                            .firstWhere(
+                                                (b) => b.id == helpOffer.areaId)
+                                            .name,
+                                      ),
+                                    if (helpOffer.areaId == null)
+                                      const KeyTitleValueRow(
+                                        keyTitle: "المنطقة",
+                                        value: 'غير محددة',
+                                      ),
+                                    KeyTitleValueRow(
+                                      keyTitle: "التاريخ",
+                                      value:
+                                          "${helpOffer.createdAt.substring(0, 10)} - ${helpOffer.createdAt.substring(11, 16)}",
                                     ),
-                                  ),
-                                ],
+                                    Text(
+                                      "*اضغط من أجل رؤية المزيد*",
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
                         if (!state.helpOffers.isFinished &&
                             state.helpOffers.items.isNotEmpty)
                           const Loader(),

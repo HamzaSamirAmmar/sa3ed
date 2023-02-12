@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/util/constants.dart';
 import '../../../../core/util/generate_screen.dart';
-import '../../../../core/widgets/KeyValueRow.dart';
 import '../../../../core/widgets/custom_container.dart';
 import '../../../../core/widgets/custom_drop_down_button.dart';
 import '../../../../core/widgets/empty_page.dart';
+import '../../../../core/widgets/key_value_row.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../../../core/widgets/scroll_back_button.dart';
 import '../../../../injection.dart';
