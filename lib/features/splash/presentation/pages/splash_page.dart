@@ -82,7 +82,7 @@ class _SplashPageState extends State<SplashPage> {
               splashIconSize: 430.w,
               backgroundColor: Theme.of(context).colorScheme.background,
               centered: true,
-              nextScreen: state.isAuth ? const HomePage() : const LoginPage(),
+              nextScreen: state.isAuth ? const HomePage() : const RegisterPage(),
               // pageTransitionType: PageTransitionType.leftToRight,
               splash: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

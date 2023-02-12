@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../features/form/data/models/help_form_model.dart';
 
 class Endpoints {
-  static const String baseUrl = "http://helpus.eu-4.evennode.com";
+  static const String baseUrl = "https://api.sa-3ed.com";
 
   static const String governorates = "/api/location/all";
 

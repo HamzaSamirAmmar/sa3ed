@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sa3ed/core/util/constants.dart';
-import 'package:sa3ed/core/util/generate_screen.dart';
-import 'package:sa3ed/core/widgets/custom_text_field.dart';
 
+import '../../../../core/util/constants.dart';
+import '../../../../core/util/generate_screen.dart';
+import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../../../injection.dart';
 import '../bloc/auth_bloc.dart';
@@ -159,36 +159,60 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         SizedBox(height: 10.h),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(PageName.registerPage);
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "ليس لديك حساب؟  ",
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.tertiary,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushReplacementNamed(PageName.registerPage);
+                            },
+                            child: Padding(
+                              padding:  EdgeInsets.only(
+                                bottom: 10.h,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .tertiary
+                                      .withOpacity(0.1),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 10.h,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "ليس لديك حساب؟  ",
+                                        style: TextStyle(
+                                          color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.6),
+                                        ),
+                                      ),
+                                      Text(
+                                        "أنشىء حساباً",
+                                        style: TextStyle(
+                                          color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.6),
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              Text(
-                                "أنشىء حساباً",
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                if(state.isLoading) const Loader(),
+                if (state.isLoading) const Loader(),
               ],
             ),
           ),

@@ -185,29 +185,53 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         SizedBox(height: 10.h),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(PageName.loginPage);
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "لديك حساب بالفعل؟  ",
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.tertiary,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushReplacementNamed(PageName.loginPage);
+                            },
+                            child: Padding(
+                              padding:  EdgeInsets.only(
+                                bottom: 10.h,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .tertiary
+                                      .withOpacity(0.1),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 10.h,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "لديك حساب بالفعل؟  ",
+                                        style: TextStyle(
+                                          color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.6),
+                                        ),
+                                      ),
+                                      Text(
+                                        "سجل الدخول",
+                                        style: TextStyle(
+                                          color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.6),
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              Text(
-                                "سجل الدخول",
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ],
