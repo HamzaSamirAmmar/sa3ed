@@ -256,9 +256,9 @@ class _FormPageState extends State<FormPage> {
                                         text.isEmpty ||
                                         text.replaceAll(" ", "").isEmpty) {
                                       return 'الرجاء إدخال رقم للتواصل';
-                                    } else if (!RegExp(r'(^(?:[+])?\d{10,15}$)')
+                                    } else if (!RegExp(r'(^(?:[+])?\d{7,15}$)')
                                             .hasMatch(text) &&
-                                        !RegExp(r'(^(?:[+])?[\u0621-\u064A\u0660-\u0669]{10,15}$)')
+                                        !RegExp(r'(^(?:[+])?[\u0621-\u064A\u0660-\u0669]{7,15}$)')
                                             .hasMatch(text)) {
                                       return "الرجاء إدخال رقم صحيح";
                                     } else {
