@@ -78,6 +78,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               ),
             ),
           );
+
+          emit(HomeState.initial());
         }
 
         /*** GetAllGovernorates **/
